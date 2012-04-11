@@ -20,17 +20,20 @@ my $MINSIZE = 4096;
 my $MAXSAMPPERINSTR = 120;
 my $BPM = 125;
 my $LINESPERBEAT = 4; ## not a parameter yet
+
+my $XMLDIR = "/home/perweij/sound/rns";
 my $SPLIT = "/home/perweij/sound/youtube/split_on_silence.sh";
-my $FXTMPLPREF = "/home/perweij/sound/rns/Fx";
-my $SONGTEMPL = "/home/perweij/sound/rns/Song.xml";
-my $INSTRTMPL = "/home/perweij/sound/rns/Instrument.xml";
-my $SAMPLETMPL = "/home/perweij/sound/rns/Sample.xml";
-my $NOTEONTMPL = "/home/perweij/sound/rns/NoteOnMapping.xml";
-my $INSTRPRELOADTMPL = "/home/perweij/sound/rns/InstrumentsPreloaded.xml";
-my $PATTERNTMPL = "/home/perweij/sound/rns/Pattern.xml";
-my $PATTERNTRACKTMPL = "/home/perweij/sound/rns/PatternTrack.xml";
-my $SEQUENCERTRACKTMPL = "/home/perweij/sound/rns/SequencerTrack.xml";
-my $LINETMPL = "/home/perweij/sound/rns/Line.xml";
+my $FXTMPLPREF = "$XMLDIR/Fx";
+my $SONGTEMPL = "$XMLDIR/Song.xml";
+my $INSTRTMPL = "$XMLDIR/Instrument.xml";
+my $SAMPLETMPL = "$XMLDIR/Sample.xml";
+my $NOTEONTMPL = "$XMLDIR/NoteOnMapping.xml";
+my $INSTRPRELOADTMPL = "$XMLDIR/InstrumentsPreloaded.xml";
+my $PATTERNTMPL = "$XMLDIR/Pattern.xml";
+my $PATTERNTRACKTMPL = "$XMLDIR/PatternTrack.xml";
+my $SEQUENCERTRACKTMPL = "$XMLDIR/SequencerTrack.xml";
+my $LINETMPL = "$XMLDIR/Line.xml";
+
 
 
 ### Init
