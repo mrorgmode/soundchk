@@ -3,6 +3,7 @@
 #  http://www.gnu.org/licenses/gpl-3.0.txt
 #
 use strict;
+use Getopt::Long;
 
 use lib("/home/perweij/SparkleShare/soundchk/lib");
 use Youtube;
