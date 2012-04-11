@@ -79,7 +79,7 @@ sub process {
   my $wav = Youtube::extract_audio(code => $link->{code});
   normalise_wav($wav);
   my $flac = $wav;
-  $flac =~ s/.wav$/_type=$opts{type}.flac/;
+  $flac =~ s/.wav$/__type=$opts{type}.flac/;
   wav_to_flac($wav, $flac);
   unlink($wav);
   my %status = ( %{$link}, %{$info} );
