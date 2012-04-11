@@ -17,6 +17,7 @@ then
     MODE=normalise
 fi
 
+
 FLAC="$1"
 
 
