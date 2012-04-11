@@ -1,4 +1,10 @@
 #!/bin/bash
+#######
+# Will only work on distros using pulseaudio.
+#
+# I got this from: http://www.outflux.net/blog/archives/2009/04/19/recording-from-pulseaudio/
+# and modified it slightly.
+#
 MODE=record
 
 SIZELIMIT=20000
