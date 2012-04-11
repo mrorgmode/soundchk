@@ -1,0 +1,107 @@
+#!/usr/bin/perl -w
+# License: 
+#  http://www.gnu.org/licenses/gpl-3.0.txt
+#
+use strict;
+use Getopt::Long;
+
+use lib("/home/perweij/SparkleShare/soundchk/lib");
+use Youtube;
+use CrawlDB;
+
+
+my %opts;
+GetOptions('src|s=s'  => \$opts{'src'},
+	   'trg|t=s'  => \$opts{'trg'},
+	   'srclang=s'  => \$opts{'srclang'},
+	   'trglang=s'  => \$opts{'trglang'},
+    );
+
+
+my $filebase = "./crawldb";
+my $cdb = CrawlDB->new(filebase => $filebase);
+
+my $max_link_result_pages = 5;
+my $generate_cue_wav = 1;
+
+my $loopstop = "";
+if($ARGV[0] eq "-l") {
+    shift(@ARGV);
+    $loopstop = shift(@ARGV);
+}
+
+if(! $cdb->todolist_size()) {
+  my $terms = join(" ", @ARGV);
+  system("echo '$terms' > $filebase.terms.txt");
+  my $links = Youtube::get_links($terms, pages => $max_link_result_pages);
+  &links2todo($links);
+}
+
+while($cdb->todolist_size()) {
+  my $l = $cdb->nextLink();
+  print STDERR "[main] $l->{code}\n";
+  my $related = Youtube::getRelatedLinks($l->{code});
+  &links2todo($related);
+  &process($l);
+  exit if(! $loopstop
+	  || -f $loopstop);
+}
+
+$cdb->end();
+
+#######################################################
+
+
+sub links2todo {
+  my $links = shift;
+  print STDERR "[links2todo] ";
+  while ($links 
+	 && @{$links}) {
+    my $link = shift(@{$links});
+    next unless($link =~ /^.*watch\?v=(.+?)(\&|$)/);
+    my $code = $1;
+
+    next if($cdb->isAdded(code => $code));
+    print STDERR ".";
+    $cdb->add(code => $code);
+  }
+  print STDERR "!\n";
+}
+
+
+
+sub process {
+  my $link = shift;
+
+  my $info = Youtube::get_info(code => $link->{code});
+  my $wav = Youtube::extract_audio(code => $link->{code});
+  normalise_wav($wav);
+  my $flac = $wav;
+#    WavSilenceSplitter::split_wav($name.".wav", "split/$name"."_", ".wav", cuewav => $generate_cue_wav);
+  $flac =~ s/.wav$/.flac/;
+  wav_to_flac($wav, $flac);
+  unlink($wav);
+  my %status = ( %{$link}, %{$info} );
+  $status{status} = 'done';
+  print STDERR "[process] set status ".join(" ", map { "$_:".$status{$_} } sort keys %status)."\n";
+  $cdb->setStatus(%status);
+}
+
+
+
+sub normalise_wav {
+    my ($file) = @_;
+
+    return system("normalize-audio $file") == 0;
+}
+
+
+
+sub wav_to_flac {
+    my ($in, $out) = @_;
+
+    die("input file should end with .wav") unless($in =~ /\.wav$/i);
+    die("output file should end with .flac") unless($out =~ /\.flac$/i);
+
+    return system("flake $in -o $out") == 0;
+}
