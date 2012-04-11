@@ -7,7 +7,7 @@ use WWW;
 
 
 my $baseurl = "http://www.youtube.com";
-my $youtubecmd = "/home/perweij/sound/youtube/youtube-dl";
+my $youtubecmd = "/home/perweij/SparkleShare/soundchk/bin/youtube-dl";
 my $MAX_PAGES = 30;
 
 
