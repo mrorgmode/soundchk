@@ -11,6 +11,9 @@
 # Notes:
 #   Will only work on distros using pulseaudio.
 #
+# License: 
+#  http://www.gnu.org/licenses/gpl-3.0.txt
+#
 # I got this from: http://www.outflux.net/blog/archives/2009/04/19/recording-from-pulseaudio/
 # and modified it slightly.
 #
