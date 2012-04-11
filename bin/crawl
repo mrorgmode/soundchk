@@ -33,6 +33,8 @@ if(! $cdb->todolist_size()) {
   system("echo '$opts{type}' > $filebase.type.txt");
   my $links = Youtube::get_links($terms, pages => $max_link_result_pages);
   &links2todo($links);
+} else {
+    chomp($opts{type} = `cat $filebase.type.txt`);
 }
 
 while($cdb->todolist_size()) {
