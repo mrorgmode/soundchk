@@ -10,7 +10,8 @@ use Youtube;
 use CrawlDB;
 
 
-my %opts = ( dest => '.' );	     ;
+my %opts = ( dest => '.',
+	     type => 'general' );
 GetOptions('stop|l=s'  => \$opts{'stop'},
 	   'type|t=s'  => \$opts{'music'},
 	   'dest|d=s'  => \$opts{'dest'},
