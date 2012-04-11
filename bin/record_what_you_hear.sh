@@ -5,6 +5,9 @@
 # Usage: 
 #   record_what_you_hear.sh ( -n ) /path/and/outputprefix
 #
+#   After a recording sessions, call script again with same prefix, and with the
+#   -n flag, to post process the recorded files (normalisation, flac-conversion).
+#
 # Notes:
 #   Will only work on distros using pulseaudio.
 #
