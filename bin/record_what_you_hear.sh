@@ -1,5 +1,5 @@
 #!/bin/bash
-#######
+##################################
 # record_what_you_hear.sh
 #
 # Usage: 
