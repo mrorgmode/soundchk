@@ -29,6 +29,7 @@ my $max_link_result_pages = 5;
 if(! $cdb->todolist_size()) {
   my $terms = join(" ", @ARGV);
   system("echo '$terms' > $filebase.terms.txt");
+  system("echo '$opts{type}' > $filebase.type.txt");
   my $links = Youtube::get_links($terms, pages => $max_link_result_pages);
   &links2todo($links);
 }
