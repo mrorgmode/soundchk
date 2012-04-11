@@ -1,4 +1,10 @@
 #!/usr/bin/perl -w
+################################
+# mksong
+#
+# License: 
+#  http://www.gnu.org/licenses/gpl-3.0.txt
+#
 use strict;
 use Getopt::Long;
 use File::Basename;
