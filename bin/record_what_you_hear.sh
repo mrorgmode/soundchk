@@ -19,9 +19,10 @@ MODE=record
 SIZELIMIT=20000
 
 
-if [ "$2" = "-n" ]
+if [ "$1" = "-n" ]
 then
     MODE=normalise
+    shift;
 fi
 
 
