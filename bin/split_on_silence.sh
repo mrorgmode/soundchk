@@ -8,6 +8,9 @@
 # Notes:
 #   This is just a sox call.
 #
+# License: 
+#  http://www.gnu.org/licenses/gpl-3.0.txt
+#
 # Per Weijnitz <per.weijnitz@gmail.com>
 
 IN=$1
