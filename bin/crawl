@@ -85,7 +85,13 @@ sub process {
   my $wav = Youtube::extract_audio(code => $link->{code});
   normalise_wav($wav);
   my $flac = $wav;
-  $flac =~ s/.wav$/__type=$opts{type}.flac/;
+  my $meta = "__type=$opts{type}";
+  if($opts{type} eq "music") {
+      chomp(my $bpm = `soundstretch /tmp/x.wav /tmp/xout.wav -bpm 2>&1 | grep "Detected BPM"`);
+      $bpm =~ s/^.* rate //;
+      $meta .= "__bpm=$bpm";
+  }
+  $flac =~ s/.wav$/$meta.flac/;
   wav_to_flac($wav, $flac);
   unlink($wav);
   my %status = ( %{$link}, %{$info} );
