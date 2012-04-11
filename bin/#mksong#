@@ -175,7 +175,9 @@ sub save_sample {
 
   if($samp =~ /__type=music/) {
       system("sox -i $file -o $file.wav");
-      system("trim_beginning_to_beat.sh $file.wav $file.trim.wav && mv $file.trim.wav $wav");
+
+      system("trim_beginning_to_beat.sh '$file.wav' '$file.trim.wav' && mv '$file.trim.wav' '$file'");
+
       chomp(my $bpm = `soundstretch $wav -bpm 2>&1 | grep "Detected BPM"`);
       $bpm =~ s/^.* rate //;
       $meta .= "__bpm=$bpm";
