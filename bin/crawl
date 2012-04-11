@@ -37,6 +37,8 @@ if(! $cdb->todolist_size()) {
     chomp($opts{type} = `cat $filebase.type.txt`);
 }
 
+
+
 while($cdb->todolist_size()) {
   my $l = $cdb->nextLink();
   print STDERR "[main] $l->{code}\n";
@@ -77,7 +79,7 @@ sub process {
   my $wav = Youtube::extract_audio(code => $link->{code});
   normalise_wav($wav);
   my $flac = $wav;
-  $flac =~ s/.wav$/.flac/;
+  $flac =~ s/.wav$/_type=$opts{type}.flac/;
   wav_to_flac($wav, $flac);
   unlink($wav);
   my %status = ( %{$link}, %{$info} );
