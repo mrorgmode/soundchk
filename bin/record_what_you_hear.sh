@@ -8,7 +8,9 @@
 
 MODE=record
 
+## delete files smaller than this number of bytes
 SIZELIMIT=20000
+
 
 if [ "$2" = "-n" ]
 then
