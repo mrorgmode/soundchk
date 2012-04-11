@@ -30,7 +30,7 @@ my $MAXSAMPPERINSTR = 120;
 my $BPM = 125;
 my $LINESPERBEAT = 4; ## not a parameter yet
 
-my $XMLDIR = "/home/perweij/sound/rns";
+my $XMLDIR = "/home/perweij/SparkleShare/soundchk/xml";
 my $SPLIT = "/home/perweij/sound/youtube/split_on_silence.sh";
 my $FXTMPLPREF = "$XMLDIR/Fx";
 my $SONGTEMPL = "$XMLDIR/Song.xml";
