@@ -17,6 +17,7 @@ GetOptions('stop|l=s'  => \$opts{'stop'},
     );
 
 
+chdir($opts{dest}) || die("directory does not exist $opts{dest}");
 my $filebase = $opts{dest}."/crawldb";
 my $cdb = CrawlDB->new(filebase => $filebase);
 
