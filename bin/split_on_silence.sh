@@ -5,6 +5,9 @@
 # Usage: 
 #   split_on_silence.sh inputfile outputprefix
 #
+# Notes:
+#   This is just a sox call.
+#
 # Per Weijnitz <per.weijnitz@gmail.com>
 
 IN=$1
