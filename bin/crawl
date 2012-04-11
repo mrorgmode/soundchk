@@ -13,6 +13,7 @@ use CrawlDB;
 my %opts;
 GetOptions('stop|l=s'  => \$opts{'stopfile'},
 	   'type|t=s'  => \$opts{'music'},
+	   'dest|d=s'  => \$opts{'dest'},
     );
 
 
