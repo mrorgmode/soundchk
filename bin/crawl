@@ -18,11 +18,11 @@ GetOptions('stop|l=s'  => \$opts{'stop'},
 
 
 chdir($opts{dest}) || die("directory does not exist $opts{dest}");
+
 my $filebase = $opts{dest}."/crawldb";
 my $cdb = CrawlDB->new(filebase => $filebase);
 
 my $max_link_result_pages = 5;
-my $generate_cue_wav = 1;
 
 if(! $cdb->todolist_size()) {
   my $terms = join(" ", @ARGV);
@@ -71,7 +71,6 @@ sub process {
   my $wav = Youtube::extract_audio(code => $link->{code});
   normalise_wav($wav);
   my $flac = $wav;
-#    WavSilenceSplitter::split_wav($name.".wav", "split/$name"."_", ".wav", cuewav => $generate_cue_wav);
   $flac =~ s/.wav$/.flac/;
   wav_to_flac($wav, $flac);
   unlink($wav);
