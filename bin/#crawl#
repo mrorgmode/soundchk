@@ -87,7 +87,7 @@ sub process {
   my $flac = $wav;
   my $meta = "__type=$opts{type}";
   if($opts{type} eq "music") {
-      
+      system("trim_beginning_to_beat.sh $wav $wav.trim
       chomp(my $bpm = `soundstretch $wav -bpm 2>&1 | grep "Detected BPM"`);
       $bpm =~ s/^.* rate //;
       $meta .= "__bpm=$bpm";
