@@ -1,0 +1,15 @@
+      <Pattern>
+        <NumberOfLines>%%LINES%%</NumberOfLines>
+        <Tracks>
+          <PatternMasterTrack type="PatternMasterTrack">
+            <AliasPatternIndex>-1</AliasPatternIndex>
+            <ColorEnabled>false</ColorEnabled>
+            <Color>0,0,0</Color>
+          </PatternMasterTrack>
+          <PatternSendTrack type="PatternSendTrack">
+            <AliasPatternIndex>-1</AliasPatternIndex>
+            <ColorEnabled>false</ColorEnabled>
+            <Color>0,0,0</Color>
+          </PatternSendTrack>
+        </Tracks>
+      </Pattern>

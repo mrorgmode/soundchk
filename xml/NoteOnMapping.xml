@@ -1,0 +1,10 @@
+          <NoteOnMapping>
+            <SampleIndex>%%SAMPLEINDEX%%</SampleIndex>
+            <UseEnvelopes>true</UseEnvelopes>
+            <MapVelocityToVolume>true</MapVelocityToVolume>
+            <BaseNote>48</BaseNote>
+            <NoteStart>%%NOTEPOS%%</NoteStart>
+            <NoteEnd>%%NOTEPOS%%</NoteEnd>
+            <VelocityStart>0</VelocityStart>
+            <VelocityEnd>127</VelocityEnd>
+          </NoteOnMapping>

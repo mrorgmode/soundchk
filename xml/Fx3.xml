@@ -1,0 +1,27 @@
+          <FilterDistortionDevice type="FilterDistortionDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Squeaking HP</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <FilterType>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </FilterType>
+            <Drive>
+              <Value>0.08000011</Value>
+              <Visualization>Device only</Visualization>
+            </Drive>
+            <Cutoff>
+              <Value>0.498196721</Value>
+              <Visualization>Device only</Visualization>
+            </Cutoff>
+            <Resonance>
+              <Value>0.576065779</Value>
+              <Visualization>Device only</Visualization>
+            </Resonance>
+            <Inertia>
+              <Value>0.0126678478</Value>
+              <Visualization>Device only</Visualization>
+            </Inertia>
+          </FilterDistortionDevice>

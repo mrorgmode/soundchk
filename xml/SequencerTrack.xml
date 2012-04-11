@@ -1,0 +1,64 @@
+    <SequencerTrack type="SequencerTrack">
+      <Name>Track %%TRACKNR%%</Name>
+      <Color>%%RED%%,%%GREEN%%,%%BLUE%%</Color>
+      <ColorBlend>0.0</ColorBlend>
+      <State>Active</State>
+      <Soloed>false</Soloed>
+      <NoteColumnStates>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+      </NoteColumnStates>
+      <NumberOfVisibleNoteColumns>1</NumberOfVisibleNoteColumns>
+      <NumberOfVisibleEffectColumns>1</NumberOfVisibleEffectColumns>
+      <VolumeColumnIsVisible>true</VolumeColumnIsVisible>
+      <PanningColumnIsVisible>false</PanningColumnIsVisible>
+      <DelayColumnIsVisible>false</DelayColumnIsVisible>
+      <TrackRouting>0</TrackRouting>
+      <GroupNestingLevel>0</GroupNestingLevel>
+      <TrackDelay>0.0</TrackDelay>
+      <Collapsed>false</Collapsed>
+      <Visible>true</Visible>
+      <FilterDevices>
+        <Devices>
+          <SequencerTrackDevice type="SequencerTrackDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Init</SelectedPresetName>
+            <SelectedPresetIsModified>false</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <CustomDeviceName>Mixer</CustomDeviceName>
+            <Panning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </Panning>
+            <Volume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </Volume>
+            <Surround>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </Surround>
+            <PostPanning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </PostPanning>
+            <PostVolume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </PostVolume>
+            <SmoothParameterChanges>true</SmoothParameterChanges>
+          </SequencerTrackDevice>
+        </Devices>
+      </FilterDevices>
+    </SequencerTrack>

@@ -1,0 +1,58 @@
+          <CabinetSimulatorDevice type="CabinetSimulatorDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Crisp</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <Cabinet>
+              <Value>11</Value>
+              <Visualization>Device only</Visualization>
+            </Cabinet>
+            <Routing>
+              <Value>3</Value>
+              <Visualization>Device only</Visualization>
+            </Routing>
+            <Distortion>
+              <Value>0.190000027</Value>
+              <Visualization>Mixer and Device</Visualization>
+            </Distortion>
+            <Wet>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </Wet>
+            <Dry>
+              <Value>0.342105269</Value>
+              <Visualization>Device only</Visualization>
+            </Dry>
+            <Stereo>true</Stereo>
+            <Gain0>
+              <Value>-8.20000076</Value>
+              <Visualization>Device only</Visualization>
+            </Gain0>
+            <Gain1>
+              <Value>-6.20000076</Value>
+              <Visualization>Device only</Visualization>
+            </Gain1>
+            <Gain2>
+              <Value>3.39999914</Value>
+              <Visualization>Device only</Visualization>
+            </Gain2>
+            <Gain3>
+              <Value>5.79999971</Value>
+              <Visualization>Device only</Visualization>
+            </Gain3>
+            <Gain4>
+              <Value>7.79999733</Value>
+              <Visualization>Device only</Visualization>
+            </Gain4>
+            <Frequency0>100</Frequency0>
+            <Frequency1>1000</Frequency1>
+            <Frequency2>2000</Frequency2>
+            <Frequency3>4000</Frequency3>
+            <Frequency4>8000</Frequency4>
+            <BandWidth0>0.650000334</BandWidth0>
+            <BandWidth1>0.160000771</BandWidth1>
+            <BandWidth2>2</BandWidth2>
+            <BandWidth3>2</BandWidth3>
+            <BandWidth4>1.0</BandWidth4>
+          </CabinetSimulatorDevice>

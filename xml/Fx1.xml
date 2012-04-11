@@ -1,0 +1,43 @@
+          <FlangerDevice type="FlangerDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>true</IsSelected>
+            <SelectedPresetName>Delayer HP</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <Amount>
+              <Value>0.699999988</Value>
+              <Visualization>Device only</Visualization>
+            </Amount>
+            <Rate>
+              <Value>0.805000186</Value>
+              <Visualization>Device only</Visualization>
+            </Rate>
+            <Amplitude>
+              <Value>0.0399999991</Value>
+              <Visualization>Device only</Visualization>
+            </Amplitude>
+            <FeedBack>
+              <Value>0.459999979</Value>
+              <Visualization>Device only</Visualization>
+            </FeedBack>
+            <Delay>
+              <Value>100</Value>
+              <Visualization>Device only</Visualization>
+            </Delay>
+            <Dephase>
+              <Value>3.14159274</Value>
+              <Visualization>Device only</Visualization>
+            </Dephase>
+            <FilterType>
+              <Value>2</Value>
+              <Visualization>Device only</Visualization>
+            </FilterType>
+            <FilterFreq>
+              <Value>114.723343</Value>
+              <Visualization>Device only</Visualization>
+            </FilterFreq>
+            <FilterResonance>
+              <Value>120.22657</Value>
+              <Visualization>Device only</Visualization>
+            </FilterResonance>
+          </FlangerDevice>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RenoiseSong doc_version="37">
+  <GlobalSongData>
+    <Octave>4</Octave>
+    <LoopCoeff>4</LoopCoeff>
+    <BeatsPerMin>%%BPM%%</BeatsPerMin>
+    <LinesPerBeat>4</LinesPerBeat>
+    <TicksPerLine>12</TicksPerLine>
+    <SignatureNumerator>4</SignatureNumerator>
+    <SignatureDenominator>4</SignatureDenominator>
+    <ShuffleIsActive>false</ShuffleIsActive>
+    <ShuffleAmounts>
+      <ShuffleAmount>0</ShuffleAmount>
+      <ShuffleAmount>0</ShuffleAmount>
+      <ShuffleAmount>0</ShuffleAmount>
+      <ShuffleAmount>0</ShuffleAmount>
+    </ShuffleAmounts>
+    <SongName>Untitled</SongName>
+    <Artist>By Somebody</Artist>
+    <ShowSongCommentsAfterLoading>false</ShowSongCommentsAfterLoading>
+    <ShowUsedAutomationsOnly>false</ShowUsedAutomationsOnly>
+    <SampleOffsetCompatibilityMode>false</SampleOffsetCompatibilityMode>
+    <PitchEffectsCompatibilityMode>false</PitchEffectsCompatibilityMode>
+    <GlobalTrackHeadroom>0.501187205</GlobalTrackHeadroom>
+    <PlaybackEngineVersion>5</PlaybackEngineVersion>
+    <RenderSelectionNameCounter>0</RenderSelectionNameCounter>
+    <RecordSampleNameCounter>0</RecordSampleNameCounter>
+    <NewSampleNameCounter>0</NewSampleNameCounter>
+  </GlobalSongData>
+  <RecordManager>
+    <LinkedTrackIndex>-1</LinkedTrackIndex>
+  </RecordManager>
+  <Instruments>
+  </Instruments>
+  <SelectedInstrumentIndex>0</SelectedInstrumentIndex>
+  <SelectedSampleIndex>0</SelectedSampleIndex>
+  <Tracks>
+    <SequencerMasterTrack type="SequencerMasterTrack">
+      <Name>Mst</Name>
+      <Color>220,220,220</Color>
+      <ColorBlend>0.0</ColorBlend>
+      <State>Active</State>
+      <Soloed>false</Soloed>
+      <NoteColumnStates>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+      </NoteColumnStates>
+      <NumberOfVisibleNoteColumns>0</NumberOfVisibleNoteColumns>
+      <NumberOfVisibleEffectColumns>1</NumberOfVisibleEffectColumns>
+      <VolumeColumnIsVisible>false</VolumeColumnIsVisible>
+      <PanningColumnIsVisible>false</PanningColumnIsVisible>
+      <DelayColumnIsVisible>false</DelayColumnIsVisible>
+      <TrackRouting>0</TrackRouting>
+      <GroupNestingLevel>0</GroupNestingLevel>
+      <TrackDelay>0.0</TrackDelay>
+      <Collapsed>false</Collapsed>
+      <Visible>true</Visible>
+      <FilterDevices>
+        <Devices>
+          <SequencerMasterTrackDevice type="SequencerMasterTrackDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Init</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <CustomDeviceName>Mixer &amp; Transport</CustomDeviceName>
+            <Panning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </Panning>
+            <Volume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </Volume>
+            <Surround>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </Surround>
+            <PostPanning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </PostPanning>
+            <PostVolume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </PostVolume>
+            <SmoothParameterChanges>true</SmoothParameterChanges>
+            <AutoDcCorrection>false</AutoDcCorrection>
+            <SoftClipping>false</SoftClipping>
+            <AutoGain>false</AutoGain>
+            <BpmAutomator>
+              <Value>80</Value>
+              <Visualization>Device only</Visualization>
+            </BpmAutomator>
+            <LpbAutomator>
+              <Value>4</Value>
+              <Visualization>Device only</Visualization>
+            </LpbAutomator>
+            <TplAutomator>
+              <Value>12</Value>
+              <Visualization>Device only</Visualization>
+            </TplAutomator>
+          </SequencerMasterTrackDevice>
+          <Eq5Device type="Eq5Device">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>FX Vintage EQ</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <InputMode>L+R</InputMode>
+            <MaxVisualizedGain>3</MaxVisualizedGain>
+            <Gain0>
+              <Value>7.900002</Value>
+              <Visualization>Device only</Visualization>
+            </Gain0>
+            <Gain1>
+              <Value>1.79999924</Value>
+              <Visualization>Device only</Visualization>
+            </Gain1>
+            <Gain2>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </Gain2>
+            <Gain3>
+              <Value>-0.5</Value>
+              <Visualization>Device only</Visualization>
+            </Gain3>
+            <Gain4>
+              <Value>3.29999924</Value>
+              <Visualization>Device only</Visualization>
+            </Gain4>
+            <Frequency0>
+              <Value>180</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency0>
+            <Frequency1>
+              <Value>2810</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency1>
+            <Frequency2>
+              <Value>6969.99951</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency2>
+            <Frequency3>
+              <Value>4830</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency3>
+            <Frequency4>
+              <Value>3914.20581</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency4>
+            <BandWidth0>
+              <Value>0.600000381</Value>
+              <Visualization>Device only</Visualization>
+            </BandWidth0>
+            <BandWidth1>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </BandWidth1>
+            <BandWidth2>
+              <Value>3</Value>
+              <Visualization>Device only</Visualization>
+            </BandWidth2>
+            <BandWidth3>
+              <Value>1.12000084</Value>
+              <Visualization>Device only</Visualization>
+            </BandWidth3>
+            <BandWidth4>
+              <Value>0.460000515</Value>
+              <Visualization>Device only</Visualization>
+            </BandWidth4>
+            <VisualizationMode>Full Display</VisualizationMode>
+          </Eq5Device>
+          <BusCompressorDevice type="BusCompressorDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Mastering A</SelectedPresetName>
+            <SelectedPresetIsModified>false</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <Threshold>
+              <Value>-20</Value>
+              <Visualization>Device only</Visualization>
+            </Threshold>
+            <Ratio>
+              <Value>0.526315808</Value>
+              <Visualization>Device only</Visualization>
+            </Ratio>
+            <Attack>
+              <Value>0.0700035021</Value>
+              <Visualization>Device only</Visualization>
+            </Attack>
+            <Release>
+              <Value>0.156563908</Value>
+              <Visualization>Device only</Visualization>
+            </Release>
+            <MakeUp>
+              <Value>6</Value>
+              <Visualization>Mixer and Device</Visualization>
+            </MakeUp>
+            <Knee>
+              <Value>20</Value>
+              <Visualization>Device only</Visualization>
+            </Knee>
+          </BusCompressorDevice>
+          <Reverb3Device type="Reverb3Device">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Boom Box</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <ReverbTime>
+              <Value>4.52000999</Value>
+              <Visualization>Device only</Visualization>
+            </ReverbTime>
+            <PreDelay>
+              <Value>24.9399891</Value>
+              <Visualization>Device only</Visualization>
+            </PreDelay>
+            <LPFilter>
+              <Value>2363.6814</Value>
+              <Visualization>Device only</Visualization>
+            </LPFilter>
+            <LPGain>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </LPGain>
+            <Color>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </Color>
+            <Width>
+              <Value>0.49000001</Value>
+              <Visualization>Device only</Visualization>
+            </Width>
+            <Pan>
+              <Value>0.470000029</Value>
+              <Visualization>Device only</Visualization>
+            </Pan>
+            <WetMix>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </WetMix>
+            <DryMix>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </DryMix>
+          </Reverb3Device>
+        </Devices>
+      </FilterDevices>
+    </SequencerMasterTrack>
+    <SequencerSendTrack type="SequencerSendTrack">
+      <Name>S01</Name>
+      <Color>178,116,116</Color>
+      <ColorBlend>0.0</ColorBlend>
+      <State>Active</State>
+      <Soloed>false</Soloed>
+      <NoteColumnStates>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+        <NoteColumnState>Active</NoteColumnState>
+      </NoteColumnStates>
+      <NumberOfVisibleNoteColumns>0</NumberOfVisibleNoteColumns>
+      <NumberOfVisibleEffectColumns>1</NumberOfVisibleEffectColumns>
+      <VolumeColumnIsVisible>false</VolumeColumnIsVisible>
+      <PanningColumnIsVisible>false</PanningColumnIsVisible>
+      <DelayColumnIsVisible>false</DelayColumnIsVisible>
+      <TrackRouting>0</TrackRouting>
+      <GroupNestingLevel>0</GroupNestingLevel>
+      <TrackDelay>0.0</TrackDelay>
+      <Collapsed>false</Collapsed>
+      <Visible>true</Visible>
+      <FilterDevices>
+        <Devices>
+          <SequencerSendTrackDevice type="SequencerSendTrackDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Init</SelectedPresetName>
+            <SelectedPresetIsModified>false</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <CustomDeviceName>Mixer</CustomDeviceName>
+            <Panning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </Panning>
+            <Volume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </Volume>
+            <Surround>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </Surround>
+            <PostPanning>
+              <Value>0.5</Value>
+              <Visualization>Device only</Visualization>
+            </PostPanning>
+            <PostVolume>
+              <Value>1.0</Value>
+              <Visualization>Device only</Visualization>
+            </PostVolume>
+            <SmoothParameterChanges>true</SmoothParameterChanges>
+          </SequencerSendTrackDevice>
+        </Devices>
+      </FilterDevices>
+    </SequencerSendTrack>
+  </Tracks>
+  <SelectedTrackIndex>0</SelectedTrackIndex>
+  <SpectrumTrackDisplayA>-2</SpectrumTrackDisplayA>
+  <SpectrumTrackDisplayB>-1</SpectrumTrackDisplayB>
+  <PatternPool>
+    <HighliteStep>0</HighliteStep>
+    <DefaultPatternLength>64</DefaultPatternLength>
+    <Patterns>
+    </Patterns>
+  </PatternPool>
+  <PatternSequence>
+    <SequenceEntries>
+      <SequenceEntry>
+        <IsSectionStart>false</IsSectionStart>
+        <SectionName>Untitled Section</SectionName>
+        <Pattern>0</Pattern>
+      </SequenceEntry>
+    </SequenceEntries>
+    <LoopSelection>
+      <CursorPos>-1</CursorPos>
+      <RangePos>-1</RangePos>
+    </LoopSelection>
+    <PatternNameWidth>0</PatternNameWidth>
+    <PatternMatrixWidth>248</PatternMatrixWidth>
+    <PatternSlotHeight>30</PatternSlotHeight>
+    <PatternSlotWidth>24</PatternSlotWidth>
+    <HighliteStep>2</HighliteStep>
+    <HighliteOffset>0</HighliteOffset>
+    <KeepSequenceSorted>true</KeepSequenceSorted>
+  </PatternSequence>
+  <LastSoloedOutMode>Active</LastSoloedOutMode>
+</RenoiseSong>

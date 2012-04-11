@@ -1,0 +1,27 @@
+          <RingModDevice type="RingModDevice">
+            <IsActive>true</IsActive>
+            <IsSelected>false</IsSelected>
+            <SelectedPresetName>Bad Radio</SelectedPresetName>
+            <SelectedPresetIsModified>true</SelectedPresetIsModified>
+            <IsMaximized>true</IsMaximized>
+            <OscillatorType>
+              <Value>0.0</Value>
+              <Visualization>Device only</Visualization>
+            </OscillatorType>
+            <Frequency>
+              <Value>0.774193525</Value>
+              <Visualization>Device only</Visualization>
+            </Frequency>
+            <Amount>
+              <Value>0.690000057</Value>
+              <Visualization>Device only</Visualization>
+            </Amount>
+            <Phase>
+              <Value>92.3806458</Value>
+              <Visualization>Device only</Visualization>
+            </Phase>
+            <Inertia>
+              <Value>0.0138050206</Value>
+              <Visualization>Device only</Visualization>
+            </Inertia>
+          </RingModDevice>
