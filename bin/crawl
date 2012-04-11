@@ -10,6 +10,12 @@ use Youtube;
 use CrawlDB;
 
 
+my %opts;
+GetOptions('stop|l=s'  => \$opts{'stopfile'},
+	   'type|t=s'  => \$opts{'music'},
+    );
+
+
 my $filebase = "./crawldb";
 my $cdb = CrawlDB->new(filebase => $filebase);
 
