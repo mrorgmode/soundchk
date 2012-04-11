@@ -22,7 +22,9 @@ chdir($opts{dest}) || die("directory does not exist $opts{dest}");
 my $filebase = $opts{dest}."/crawldb";
 my $cdb = CrawlDB->new(filebase => $filebase);
 
+
 my $max_link_result_pages = 5;
+
 
 if(! $cdb->todolist_size()) {
   my $terms = join(" ", @ARGV);
