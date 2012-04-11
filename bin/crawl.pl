@@ -1,4 +1,7 @@
 #!/usr/bin/perl -w
+# License: 
+#  http://www.gnu.org/licenses/gpl-3.0.txt
+#
 use strict;
 
 use lib("/home/perweij/sound/youtube");
