@@ -2,7 +2,7 @@
 # crawl
 #
 # Usage:
-#  crawl ( --stop
+#  crawl ( --stop|-l stopfile ) ( --type type ) ( --dest|-d destdir )
 # License: 
 #  http://www.gnu.org/licenses/gpl-3.0.txt
 #
