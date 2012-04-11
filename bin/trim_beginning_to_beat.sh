@@ -7,8 +7,8 @@ OUT=$2
 LIMIT="-20d"
 
 
-## Find maximum amplitude
-MAXAMP=$(sox $IN -n stat 2>&1 | grep "Maximum amplitude:" | sed 's/^.*:[[:space:]]*//')
+# ## Find maximum amplitude
+# MAXAMP=$(sox $IN -n stat 2>&1 | grep "Maximum amplitude:" | sed 's/^.*:[[:space:]]*//')
 
 
 cp $IN $OUT
