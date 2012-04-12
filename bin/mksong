@@ -88,6 +88,7 @@ my $mean_bpm = calc_mean_bpm();
 if($mean_bpm) {
     $BPM = $mean_bpm;
     $LINESPERBEAT = int($LINESPERBEAT / 2) if($BPM < 100);
+    $MAXLINES = $LINESPERBEAT * 16;
     map { $_->{lines} = ceil(((0.0 + $_->{nrsamples}) / $_->{rate}) * ($BPM / 60 * $LINESPERBEAT)); } @sample;
 }
 
