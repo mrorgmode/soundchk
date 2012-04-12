@@ -173,16 +173,6 @@ sub save_sample {
 
   move($samp, $file);
 
-  if($samp =~ /__type=music/) {
-      system("sox -i $file -o $file.wav");
-
-      system("trim_beginning_to_beat.sh '$file.wav' '$file.trim.wav' && mv '$file.trim.wav' '$file'");
-
-      chomp(my $bpm = `soundstretch $wav -bpm 2>&1 | grep "Detected BPM"`);
-      $bpm =~ s/^.* rate //;
-      $meta .= "__bpm=$bpm";
-  }
-
   chomp(my $nrsamples = `sox --info '$file' | grep samples`);
   $nrsamples =~ s/^.* = (\d+) samples.*$/$1/g;
   my $rate = `sox --info '$file' | grep "^Sample Rate"`;
@@ -208,7 +198,7 @@ sub xml_save_instruments {
     print STDERR "[xml_save_instrument] $instr->{name}\n";
 	
     xml_ins_template($INSTRTMPL, '<\/Instruments>', 
-		     DESIGNATION=>"auto");
+ 		     DESIGNATION=>"auto");
 
     for my $si (0..(scalar(@{$instr->{samples}})-1)) {
       xml_ins_template($SAMPLETMPL, '<\/Samples>', 
