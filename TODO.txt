@@ -3,3 +3,8 @@
    - reverse
    - retrig
    - vibrato
+ - på rytmspåret: 
+   - lägg in två notspår
+   - starta rytmer som vanligt i båda
+   - alternera 0 - max-volym mellan de två
+ - alltid en lfo med frekvens kopplad till bpm
