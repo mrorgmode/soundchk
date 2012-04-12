@@ -1,5 +1,5 @@
     <SequencerTrack type="SequencerTrack">
-      <Name>Track %%TRACKNR%%</Name>
+      <Name>%%TRACKNAME%%</Name>
       <Color>%%RED%%,%%GREEN%%,%%BLUE%%</Color>
       <ColorBlend>0.0</ColorBlend>
       <State>Active</State>

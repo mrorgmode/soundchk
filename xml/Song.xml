@@ -4,7 +4,7 @@
     <Octave>4</Octave>
     <LoopCoeff>4</LoopCoeff>
     <BeatsPerMin>%%BPM%%</BeatsPerMin>
-    <LinesPerBeat>4</LinesPerBeat>
+    <LinesPerBeat>%%LINESPERBEAT%%</LinesPerBeat>
     <TicksPerLine>12</TicksPerLine>
     <SignatureNumerator>4</SignatureNumerator>
     <SignatureDenominator>4</SignatureDenominator>
