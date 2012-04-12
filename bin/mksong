@@ -497,7 +497,8 @@ sub generate_track_monophonic {
     my $index = 0;
     while($index < $args{endline}) {
 		
-	if(int(rand(100)) > int($SKIPPROB*100)) {
+	if((defined($args{distrib}) && $args{distrib} eq "fixed")
+	   || int(rand(100)) > int($SKIPPROB*100)) {
 	    my $soundnr = $sounds[int(rand(@sounds))];
 
 	    print STDERR "NOTE index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
@@ -507,7 +508,11 @@ sub generate_track_monophonic {
 			   pan => 40 + int(rand(40)) - int(rand(40)),
 			   vol => 40 + int(rand(40)) - int(rand(40)),
 		           notecol => 0 });
-	    $index += $soundhash{$soundnr}->{lines};
+	    if(defined($args{spacing})) {
+		$index += $args{spacing};
+	    } else {
+		$index += $soundhash{$soundnr}->{lines};
+	    }
 	} else {
 	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
 	}
