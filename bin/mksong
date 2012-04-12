@@ -348,7 +348,7 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
       my $tno = 0;
       while($tno < @{$song->{track}->[$i]}) {
 	  my $line = $song->{track}->[$i]->[$tno]->{index};
-
+print STDERR "tracknr:$i tno:$tno index:$line\n";
 	  my $toline = $line;
 	  while($toline < @{$song->{track}->[$i]}
 		&& $song->{track}->[$i]->[$toline]->{index} == $line) {
