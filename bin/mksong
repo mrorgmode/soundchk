@@ -301,7 +301,7 @@ sub xml_save_instruments {
 		       FILE=>$instr->{samples}->[$si]->{file},
 		       NRSAMPLES => $instr->{samples}->[$si]->{nrsamples},
 #		       TRANSPOSE => 48 - (scalar(keys(%soundhash)) % $MAXSAMPPERINSTR) );
-		       TRANSPOSE => 48 - scalar(@{$instr->{samples}}) );
+		       TRANSPOSE => 48 - $si );
                        
       xml_ins_template($NOTEONTMPL, '<\/NoteOnMappings>', 
 		       NOTEPOS => $si,
