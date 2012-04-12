@@ -386,6 +386,9 @@ sub generate_patterns_bpm {
 
 
 sub generate_track_bpm {
+    my %args = @_;
+    $args{endline} || die("call with endline arg");
+
     my @sounds = grep { $soundhash{$_}->{bpm}
 			&& $soundhash{$_}->{bpm} >= ($BPM - $STRETCHMAXBEATS)
 			&& $soundhash{$_}->{bpm} <= ($BPM + $STRETCHMAXBEATS)
