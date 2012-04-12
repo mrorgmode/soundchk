@@ -319,7 +319,6 @@ sub xml_generate_patterns {
   my $maxline = 0;
   for(my $i = 0; $i < scalar(@{$song->{track}}); $i++) {
       if(scalar(@{$song->{track}->[$i]})) {
-print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[$i]->[-1]->{soundnr}."\n";
 	  my $endline = $soundhash{$song->{track}->[$i]->[-1]->{soundnr}}->{lines}
 	  + $song->{track}->[$i]->[-1]->{index};
 	  $maxline = $endline > $maxline ? $endline : $maxline;
@@ -339,6 +338,13 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 		       RED => int(rand(256)), GREEN => int(rand(256)), BLUE => int(rand(256)));
       xml_ins_template($PATTERNTRACKTMPL, '<PatternMasterTrack');
 
+      next unless(scalar(@{$song->{track}->[$i]}));
+
+
+      my $nrcols = 1;
+      map { $nrcols = ($_->{notecol}+1) > $nrcols ? ($_->{notecol}+1) : $nrcols } @{$song->{track}->[$i]};
+
+
       if($USETRACKFX > 0.0
 	  && int($USETRACKFX * 100) > int(rand(100))) {
 	  chomp(my @fxs = glob("$FXTMPLPREF"."*"));
@@ -356,20 +362,28 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 	  }
 	  $tono--;
 
-print STDERR "tracknr:$i tno:$tno (index:$line) tono:$tono  elems:".scalar(@{$song->{track}->[$i]})." linespan:". $song->{track}->[$i]->[$tno]->{index}."-". $song->{track}->[$i]->[$tono]->{index}."\n";
-use Data::Dumper; print STDERR "CONT:".Dumper($song->{track}->[$i]->[0]);
-	  my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]->[$tno..$tono]};
-	  xml_ins_template($LINETMPL, '<\/Lines>');
-	  foreach my $trackline (@cols) {
-	      xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
-			       INDEX=>$trackline->{index}, 
-			       INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
-			       NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
-			       PAN => $trackline->{pan},
-			       VOL => $trackline->{vol});
-	      $soundhash{$trackline->{soundnr}}->{used}++;
-	  }
+	  my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]}[$tno..$tono];
 
+	  xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>$line);
+
+	  for(my $colnr = 0; $colnr < $nrcols; $colnr++) {
+	      my ($trackline) = grep { $_->{notecol} == $colnr } (@cols);
+	      if($trackline) {
+		  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
+				   INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
+				   NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
+				   PAN => $trackline->{pan},
+				   VOL => $trackline->{vol});
+		  $soundhash{$trackline->{soundnr}}->{used}++;
+	      } else {
+		  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
+				   INSTRNR=> '..',
+				   NOTE => '---',
+				   PAN => '..',
+				   VOL => '..');
+	      }
+	  }
+	  
 	  $tno = $tono + 1;
       }
     }
