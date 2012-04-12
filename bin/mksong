@@ -475,6 +475,10 @@ sub generate_track_monophonic {
     }
 
     my @track = ();
+
+    print STDERR "[generate_track_monophonic] choosing from ".scalar(@sounds)." samples\n";
+    return \@track unless(@sounds);
+
     my $index = 0;
     while($index < $args{endline}) {
 		
