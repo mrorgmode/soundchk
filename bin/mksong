@@ -224,13 +224,7 @@ sub save_split_sample {
 	copy($part, $pitchpart);
 	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
 	system("soundstretch '$pitchpart.wav' -pitch=3") || warn("failed");
-	$bpm =~ s/^.* rate //;
-	
-	if($bpm) {
-	    system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
-	} else {
-	    $bpm = 0;
-	}
+	system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
 	unlink("$pitchpart.wav");
 		
 	## don't save too short samples
