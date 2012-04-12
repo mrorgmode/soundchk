@@ -110,11 +110,11 @@ xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
 
 
 ### XML Patterns
-xml_generate_patterns();
+#xml_generate_patterns();
 
 
 ### Delete unused samples
-delete_unused_samples();
+#delete_unused_samples();
 
 
 ### Create song file
