@@ -396,7 +396,7 @@ sub generate_track_bpm {
     print STDERR "[generate_track_bpm] choosing from ".scalar(@sounds)." samples\n";
     my @track = ();
     my $index = 0;
-    while(@sounds) {
+    while($index < $args{endline}) {
 		
 	if(int(rand(100)) > int($SKIPPROB*100)) {
 	    my $soundnr = $sounds[int(rand(@sounds))];
