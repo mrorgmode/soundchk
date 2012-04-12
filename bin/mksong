@@ -396,8 +396,7 @@ sub generate_track_bpm {
     while(@sounds) {
 		
 	if(int(rand(100)) > int($SKIPPROB*100)) {
-	    my $soundnr = pop(@sounds);
-
+	    my $soundnr = $sounds[int(rand(@sounds))];
 
 	    print STDERR "NOTE index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
 
