@@ -397,7 +397,7 @@ sub generate_track_bpm {
     my @track = ();
     my $index = 0;
     while($index < $args{endline}) {
-		
+	print STDERR "test $index/$args{endline}\n";
 	if(int(rand(100)) > int($SKIPPROB*100)) {
 	    my $soundnr = $sounds[int(rand(@sounds))];
 
