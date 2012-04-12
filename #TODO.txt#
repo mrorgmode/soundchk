@@ -1,0 +1,9 @@
+ - generera 12 notsteg för röstklipp, så röster kan sjunga (solo, duett etc)
+ - effect commands:
+   - reverse
+   - retrig
+   - vibrato
+ - på rytmspåret: 
+   - lägg in två notspår
+   - starta rytmer som vanligt i båda
+   - alternera 0 - max-volym mellan d
