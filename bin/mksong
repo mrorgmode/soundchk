@@ -349,14 +349,12 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
       while($tno < @{$song->{track}->[$i]}) {
 	  my $line = $song->{track}->[$i]->[$tno]->{index};
 print STDERR "tracknr:$i tno:$tno index:$line\n";
-	  my $toline = $line;
-	  while($toline < @{$song->{track}->[$i]}
-		&& $song->{track}->[$i]->[$toline]->{index} == $line) {
-	      $toline++;
-	      $tno++;
+	  my $tono = $tno;
+	  while($tono < @{$song->{track}->[$i]}
+		&& $song->{track}->[$i]->[$tono]->{index} == $line) {
+	      $tono++;
 	  }
-	  $toline--;
-	  $tno--;
+	  $tono--;
 
 	  my @cols = sort { print STDERR Dumper($a); $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]->[$line..$toline]};
 	  xml_ins_template($LINETMPL, '<\/Lines>');
@@ -370,7 +368,7 @@ print STDERR "tracknr:$i tno:$tno index:$line\n";
 	      $soundhash{$trackline->{soundnr}}->{used}++;
 	  }
 
-	  $tno++;
+	  $tno = $tono + 1;
       }
     }
     
