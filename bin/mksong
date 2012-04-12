@@ -357,7 +357,7 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 	  $tono--;
 
 print STDERR "tracknr:$i tno:$tno (index:$line) tono:$tono  elems:".scalar(@{$song->{track}->[$i]})." linespan:". $song->{track}->[$i]->[$tno]->{index}."-". $song->{track}->[$i]->[$tono]->{index}."\n";
-print STDERR "CONT:".Dumper(@{$song->{track}->[$i]->[$tno..$tono]});
+print STDERR "CONT:".Dumper($song->{track}->[$i]);
 	  my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]->[$tno..$tono]};
 	  xml_ins_template($LINETMPL, '<\/Lines>');
 	  foreach my $trackline (@cols) {
