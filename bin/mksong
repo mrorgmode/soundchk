@@ -414,10 +414,11 @@ sub generate_patterns_bpm {
 #    $endline = $MAXLINES > 0 && $endline > $MAXLINES ? $MAXLINES : $endline;
 
     $track[1] = generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2);
-    $track[2] = generate_track_monophonic(endline => $MAXLINES, maxinstrs => 1);
-    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2);
-    $track[4] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 3);
-    $track[5] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1);
+    $track[2] = generate_track_monophonic(endline => $MAXLINES);
+#    $track[2] = generate_track_monophonic(endline => $MAXLINES, maxinstrs => 1);
+#    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2);
+#    $track[4] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 3);
+    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1);
 
     return { track => \@track };
 }
