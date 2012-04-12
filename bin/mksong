@@ -348,19 +348,24 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
       my $tno = 0;
       while($tno < @{$song->{track}->[$i]}) {
 	  my $line = $song->{track}->[$i]->[$tno]->{index};
+
 	  my $toline = $line;
 	  while($toline < @{$song->{track}->[$i]}
 		&& $song->{track}->[$i]->[$toline]->{index} == $line) {
+	      $toline++;
+	  }
 
-      foreach my $trackline (@{$song->{track}->[$i]}) {
-	  xml_ins_template($LINETMPL, '<\/Lines>', 
-			   INDEX=>$trackline->{index}, 
-			   INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
-			   NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
-			   PAN => $trackline->{pan},
-			   VOL => $trackline->{vol});
-NOTETMPL
-	  $soundhash{$trackline->{soundnr}}->{used}++;
+	  my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]->[$line..$toline]};
+	  xml_ins_template($LINETMPL, '<\/Lines>');
+	  foreach my $trackline (@cols) {
+	      xml_ins_template($LINETMPL, '<\/NoteColumns>', 
+			       INDEX=>$trackline->{index}, 
+			       INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
+			       NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
+			       PAN => $trackline->{pan},
+			       VOL => $trackline->{vol});
+	      $soundhash{$trackline->{soundnr}}->{used}++;
+	  }
       }
     }
     
