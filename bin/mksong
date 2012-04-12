@@ -47,7 +47,7 @@ my $PATTERNTMPL = "$XMLDIR/Pattern.xml";
 my $PATTERNTRACKTMPL = "$XMLDIR/PatternTrack.xml";
 my $SEQUENCERTRACKTMPL = "$XMLDIR/SequencerTrack.xml";
 my $LINETMPL = "$XMLDIR/Line.xml";
-
+my $NOTETMPL = "$XMLDIR/NoteColumn.xml";
 
 
 ### Init
@@ -345,6 +345,10 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 	  xml_ins_template($fxs[int(rand(@fxs))], '<\/Devices>', '__skip' => 2);
       }
 
+      my $tno = 0;
+      my $line = $song->{track}->[$i]->[0];
+      while($tno < @{$song->{track}->[$i]}) {
+
       foreach my $trackline (@{$song->{track}->[$i]}) {
 	  xml_ins_template($LINETMPL, '<\/Lines>', 
 			   INDEX=>$trackline->{index}, 
@@ -352,6 +356,7 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 			   NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
 			   PAN => $trackline->{pan},
 			   VOL => $trackline->{vol});
+NOTETMPL
 	  $soundhash{$trackline->{soundnr}}->{used}++;
       }
     }
@@ -464,7 +469,8 @@ sub generate_track_monophonic {
 	    push(@track, { index => $index,
 			   soundnr => $soundnr,
 			   pan => 40 + int(rand(40)) - int(rand(40)),
-			   vol => 40 + int(rand(40)) - int(rand(40)) });
+			   vol => 40 + int(rand(40)) - int(rand(40)),
+		           notecol => 0 });
 	    $index += $soundhash{$soundnr}->{lines};
 	} else {
 	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
