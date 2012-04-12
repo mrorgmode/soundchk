@@ -217,7 +217,7 @@ sub save_split_sample {
     my $part = "/tmp/part_".$i."_".basename($samp);
 
 	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
-	copy($s, $pitchpart);
+	system("cp 's' '$pitchpart'") == 0 || warn "copy"
 
 
     move($s, $part);
@@ -226,7 +226,7 @@ sub save_split_sample {
 
     if($samp =~ /__type=speech/) {
 	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
-	system("soundstretch '$pitchpart.wav' -pitch=3") || warn("failed");
+	system("soundstretch '$pitchpart.wav' -pitch=3") == 0 || warn("failed");
 	system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
 	unlink("$pitchpart.wav");
 		
