@@ -367,6 +367,7 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
 			       VOL => $trackline->{vol});
 	      $soundhash{$trackline->{soundnr}}->{used}++;
 	  }
+	  $tno++;
       }
     }
     
