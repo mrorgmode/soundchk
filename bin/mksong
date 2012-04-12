@@ -413,8 +413,11 @@ sub generate_track_bpm {
 			&& $soundhash{$_}->{bpm} >= ($BPM - $STRETCHMAXBEATS)
 			&& $soundhash{$_}->{bpm} <= ($BPM + $STRETCHMAXBEATS)
                       } keys %soundhash;
-    print STDERR "[generate_track_bpm] choosing from ".scalar(@sounds)." samples\n";
     my @track = ();
+
+    print STDERR "[generate_track_bpm] choosing from ".scalar(@sounds)." samples\n";
+    return \@track unless(@sounds);
+
     my $index = 0;
     while($index < $args{endline}) {
 	print STDERR "test $index/$args{endline}\n";
