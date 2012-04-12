@@ -420,7 +420,7 @@ sub generate_track_bpm {
 			   soundnr => $soundnr,
 			   pan => 40 + int(rand(40)) - int(rand(40)),
 			   vol => 40 + int(rand(40)) - int(rand(40)),
-		           notecol => 0});
+		           notecol => 0 });
 	    $index += $soundhash{$soundnr}->{lines};
 	} else {
 	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
