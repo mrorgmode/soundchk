@@ -215,13 +215,16 @@ sub save_split_sample {
     }
 
     my $part = "/tmp/part_".$i."_".basename($samp);
+
+	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
+	copy($s, $pitchpart);
+
+
     move($s, $part);
     save_sample($part, orgfile => basename($samp));
 
 
     if($samp =~ /__type=speech/) {
-	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
-	copy($part, $pitchpart);
 	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
 	system("soundstretch '$pitchpart.wav' -pitch=3") || warn("failed");
 	system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
