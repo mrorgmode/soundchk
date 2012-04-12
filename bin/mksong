@@ -107,7 +107,7 @@ xml_save_instruments(\@instrument);
 
 #### Renoise preloaded instruments
 xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
-exit;
+
 
 ### XML Patterns
 xml_generate_patterns();
@@ -305,6 +305,7 @@ sub xml_save_instruments {
       xml_ins_template($NOTEONTMPL, '<\/NoteOnMappings>', 
 		       NOTEPOS => $si,
 		       SAMPLEINDEX => $si);
+
       $soundhash{scalar(keys(%soundhash))} = { instr => $ii, note => $si, name => $instr->{samples}->[$si]->{name}, lines => $instr->{samples}->[$si]->{lines}, bpm => $instr->{samples}->[$si]->{bpm}, file => $instr->{samples}->[$si]->{file}, rate => $instr->{samples}->[$si]->{rate} };
     }
   }
