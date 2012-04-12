@@ -346,8 +346,11 @@ print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[
       }
 
       my $tno = 0;
-      my $line = $song->{track}->[$i]->[0];
       while($tno < @{$song->{track}->[$i]}) {
+	  my $line = $song->{track}->[$i]->[$tno]->{index};
+	  my $toline = $line;
+	  while($toline < @{$song->{track}->[$i]}
+		&& $song->{track}->[$i]->[$toline]->{index} == $line) {
 
       foreach my $trackline (@{$song->{track}->[$i]}) {
 	  xml_ins_template($LINETMPL, '<\/Lines>', 
