@@ -219,6 +219,30 @@ sub save_split_sample {
     save_sample($part, orgfile => basename($samp));
 
 
+    if($samp =~ /__type=speech/) {
+	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
+	copy($part, $pitchpart);
+	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
+	system("$TRIM '$pitchpart.wav' '$pitchpart.trim.wav' && mv '$pitchpart.trim.wav' '$pitchpart.wav'");
+	chomp($bpm = `soundstretch '$pitchpart.wav' -bpm 2>&1 | grep "Detected BPM"`);
+	$bpm =~ s/^.* rate //;
+	
+	if($bpm) {
+	    system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
+	} else {
+	    $bpm = 0;
+	}
+	unlink("$pitchpart.wav");
+	
+	
+	## don't save too short samples
+	my $st = stat($pitchpart);
+	if ($st->size < $MINSIZE) {
+	    unlink($pitchpart);
+	    return;
+	}
+    }
+
 
     $i++;
     $sindex++;
