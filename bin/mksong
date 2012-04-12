@@ -413,7 +413,7 @@ sub generate_patterns_bpm {
 
     $track[1] = generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2);
     $track[2] = generate_track_monophonic(endline => $MAXLINES, maxinstrs => 1);
-    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => fixed, spacing => 2);
+    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2);
 
     return { track => \@track };
 }
