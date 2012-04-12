@@ -47,7 +47,7 @@ my $PATTERNTMPL = "$XMLDIR/Pattern.xml";
 my $PATTERNTRACKTMPL = "$XMLDIR/PatternTrack.xml";
 my $SEQUENCERTRACKTMPL = "$XMLDIR/SequencerTrack.xml";
 my $LINETMPL = "$XMLDIR/Line.xml";
-
+my $NOTETMPL = "$XMLDIR/NoteColumn.xml";
 
 
 ### Init
