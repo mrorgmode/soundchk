@@ -1,5 +1,3 @@
-              <Line index="%%INDEX%%">
-                <NoteColumns>
                   <NoteColumn>
                     <Note>%%NOTE%%</Note>
                     <Instrument>%%INSTRNR%%</Instrument>
@@ -7,5 +5,3 @@
                     <Panning>%%PAN%%</Panning>
                     <Delay>..</Delay>
                   </NoteColumn>
-                </NoteColumns>
-              </Line>
