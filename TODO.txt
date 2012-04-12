@@ -2,3 +2,4 @@
  - effect commands:
    - reverse
    - retrig
+   - vibrato
