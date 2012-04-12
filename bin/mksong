@@ -319,7 +319,7 @@ sub xml_generate_patterns {
   my $maxline = 0;
   for(my $i = 0; $i < scalar(@{$song->{track}}); $i++) {
       if(scalar(@{$song->{track}->[$i]})) {
-print STDERR "SC:".scalar(@{$song->{track}->[$i]})."\n";
+print STDERR "SC:".scalar(@{$song->{track}->[$i]})." soundnr:".$song->{track}->[$i]->[-1]->{soundnr}."\n";
 	  my $endline = $soundhash{$song->{track}->[$i]->[-1]->{soundnr}}->{lines}
 	  + $song->{track}->[$i]->[-1]->{index};
 	  $maxline = $endline > $maxline ? $endline : $maxline;
