@@ -216,8 +216,8 @@ sub save_split_sample {
 
     my $part = "/tmp/part_".$i."_".basename($samp);
 
-	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
-	system("cp 's' '$pitchpart'") == 0 || warn "copy"
+    my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
+    system("cp 's' '$pitchpart'") == 0 || warn "copy";
 
 
     move($s, $part);
