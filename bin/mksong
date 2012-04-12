@@ -223,7 +223,7 @@ sub save_split_sample {
 	my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
 	copy($part, $pitchpart);
 	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
-	system("soundstretch '$pitchpart.wav' -pitch=3");
+	system("soundstretch '$pitchpart.wav' -pitch=3") || warn("failed");
 	$bpm =~ s/^.* rate //;
 	
 	if($bpm) {
