@@ -33,7 +33,7 @@ my $LINESPERBEAT = 8; ## not a parameter yet
 my $MAXLINES = $LINESPERBEAT * 16;
 #my $MAXLINES = 0; ## renoise can't load patterns with hundreds of lines, crash
 
-my $STRETCHMAXBEATS = 40;
+my $STRETCHMAXBEATS = 20;
 
 my $XMLDIR = "/home/perweij/SparkleShare/soundchk/xml";
 my $SPLIT = "/home/perweij/SparkleShare/soundchk/bin/split_on_silence.sh";
