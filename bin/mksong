@@ -370,15 +370,15 @@ sub generate_patterns_bpm {
 	push(@track_curindex, 0);
     }
 
-    $track[0] = generate_track_bpm();
+    $track[0] = generate_track_bpm(endline => $MAXLINES);
 
-    my $endline = @{$track[0]} ? $soundhash{$track[0]->[-1]->{soundnr}}->{lines} + $track[0]->[-1]->{index}
-                               : $MAXLINES;
-    $endline = $MAXLINES > 0 && $endline > $MAXLINES ? $MAXLINES : $endline;
+#    my $endline = @{$track[0]} ? $soundhash{$track[0]->[-1]->{soundnr}}->{lines} + $track[0]->[-1]->{index}
+#                               : $MAXLINES;
+#    $endline = $MAXLINES > 0 && $endline > $MAXLINES ? $MAXLINES : $endline;
 
-    $track[1] = generate_track_monophonic(endline => $endline, maxlength => $LINESPERBEAT*2);
-    $track[2] = generate_track_monophonic(endline => $endline, maxinstrs => 1);
-    $track[3] = generate_track_monophonic(endline => $endline);
+    $track[1] = generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2);
+    $track[2] = generate_track_monophonic(endline => $MAXLINES, maxinstrs => 1);
+    $track[3] = generate_track_monophonic(endline => $MAXLINES);
 
     return { track => \@track };
 }
