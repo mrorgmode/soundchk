@@ -300,7 +300,8 @@ sub xml_save_instruments {
 		       DESIGNATION=>sprintf("Sample %.2d (%s)", $si, $instr->{samples}->[$si]->{designation}),
 		       FILE=>$instr->{samples}->[$si]->{file},
 		       NRSAMPLES => $instr->{samples}->[$si]->{nrsamples},
-		       TRANSPOSE => 48 - (scalar(keys(%soundhash)) % $MAXSAMPPERINSTR) );
+#		       TRANSPOSE => 48 - (scalar(keys(%soundhash)) % $MAXSAMPPERINSTR) );
+		       TRANSPOSE => 48 - scalar(@{$instr->{samples}}) );
                        
       xml_ins_template($NOTEONTMPL, '<\/NoteOnMappings>', 
 		       NOTEPOS => $si,
