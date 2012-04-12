@@ -107,7 +107,7 @@ xml_save_instruments(\@instrument);
 
 #### Renoise preloaded instruments
 xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
-
+exit;
 
 ### XML Patterns
 xml_generate_patterns();
