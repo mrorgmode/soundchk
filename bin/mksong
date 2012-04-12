@@ -200,8 +200,8 @@ sub save_split_sample {
   my @files = glob("$pref*");
   my $sindex = 0;
   while (@files
-	 && $i < $MAXSPLIT
-	 && $i < @files) {
+	 && $i < $MAXSPLIT) {
+#	 && $i < @files) {
 
     ## optionally random order
     $sindex = ($RANDOMSPLIT ? int(rand(@files)) : $sindex);
