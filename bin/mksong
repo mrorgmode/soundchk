@@ -18,25 +18,28 @@ use File::stat;
 use POSIX qw/ceil/;
 
 
+## Sequencer parameters
+my $NRPATTERNS = 2;
+my $nrtracks = 10;
+my $notespace = 1;
+my $BPM = 125;
+my $STRETCHMAXBEATS = 20;
+my $LINESPERBEAT = 8;
+my $MAXLINES = $LINESPERBEAT * 16;
 my $USETRACKFX = 0.7;
 my $SKIPPROB = 0.2;
-my $NRPATTERNS = 1;
+
+
+## Instrument parameters
 my $MAXSPLIT = 20;
 my $RANDOMSPLIT = 1;
-my $notespace = 1;
-my $nrtracks = 2; # == voices in polyphony
 my $MINSIZE = 4096;
 my $MAXSAMPPERINSTR = 200;
-my $BPM = 125;
-my $LINESPERBEAT = 8; ## not a parameter yet
-#my $MAXLINES = 53;
-my $MAXLINES = $LINESPERBEAT * 16;
-#my $MAXLINES = 0; ## renoise can't load patterns with hundreds of lines, crash
 
-my $STRETCHMAXBEATS = 20;
 
 my $XMLDIR = "/home/perweij/SparkleShare/soundchk/xml";
 my $SPLIT = "/home/perweij/SparkleShare/soundchk/bin/split_on_silence.sh";
+my $SPLIT_EVEN = "/home/perweij/SparkleShare/soundchk/bin/split_evenly.sh";
 my $TRIM = "/home/perweij/SparkleShare/soundchk/bin/trim_beginning_to_beat.sh";
 my $FXTMPLPREF = "$XMLDIR/Fx";
 my $SONGTEMPL = "$XMLDIR/Song.xml";
@@ -49,6 +52,7 @@ my $PATTERNTRACKTMPL = "$XMLDIR/PatternTrack.xml";
 my $SEQUENCERTRACKTMPL = "$XMLDIR/SequencerTrack.xml";
 my $LINETMPL = "$XMLDIR/Line.xml";
 my $NOTETMPL = "$XMLDIR/NoteColumn.xml";
+my $SEQUENCEENTRYTMPL = "$XMLDIR/SequenceEntry.xml";
 
 
 ### Init
@@ -77,7 +81,14 @@ system("touch "."$opts{name}/Song.xml");
 ### Save samples
 
 if ($opts{split}) {
-  map { save_split_sample($_) } @ARGV;
+    foreach my $sound (@ARGV) {
+	print STDERR "[save_split_sample] splitting...\n";
+	my $pref = "/tmp/splitsamp".int(rand(100000));
+	system("$SPLIT $sound $pref.flac");
+	save_split_sample($sound, $pref);
+	system("$SPLIT_EVEN $sound $pref.flac 0.3");
+	save_split_sample($sound, $pref);
+    }
 } else {
   map { save_sample($_) } @ARGV;
 }
@@ -105,12 +116,16 @@ generate_instruments(\@sample);
 xml_save_instruments(\@instrument);
 
 
-#### Renoise preloaded instruments
+### Renoise preloaded instruments
 xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
 
 
+### Generate a song
+my $song = generate_patterns_bpm();
+
+
 ### XML Patterns
-xml_generate_patterns();
+xml_render_patterns($song);
 
 
 ### Delete unused samples
@@ -192,10 +207,8 @@ sub generate_instruments {
 
 sub save_split_sample {
   my $samp = shift;
+  my $pref = shift;
 
-  print STDERR "[save_split_sample] splitting...\n";
-  my $pref = "/tmp/splitsamp".int(rand(100000));
-  system("$SPLIT $samp $pref.flac");
   my $i = 0;
   my @files = glob("$pref*");
   my $sindex = 0;
@@ -215,34 +228,41 @@ sub save_split_sample {
     }
 
     my $part = "/tmp/part_".$i."_".basename($samp);
-
-    my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
-    system("cp '$s' '$pitchpart'") == 0 || warn "copy";
-
-
     move($s, $part);
-    save_sample($part, orgfile => basename($samp));
 
 
+
+    my $repitch = -12;
     if($samp =~ /__type=speech/) {
-	system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
-	system("soundstretch '$pitchpart.wav' -pitch=3") == 0 || warn("failed");
-	system("flake '$pitchpart.wav' -o '$pitchpart' 2>/dev/null");
-	unlink("$pitchpart.wav");
-		
-	## don't save too short samples
-	my $st = stat($pitchpart);
-	if ($st->size < $MINSIZE) {
-	    unlink($pitchpart);
-	} else {
-	    save_sample($pitchpart, orgfile => basename($samp));
-	}
+	$repitch = 3;
     }
+    my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
+    copy($part, $pitchpart) || warn "copy";
+    system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
+    system("soundstretch '$pitchpart.wav' '$pitchpart.out.wav' -pitch=$repitch") == 0 || warn("failed");
+    system("flake '$pitchpart.out.wav' -o '$pitchpart' 2>/dev/null");
+    unlink("$pitchpart.wav");
+    unlink("$pitchpart.out.wav");
+    
+    ## don't save too short samples
+    $st = stat($pitchpart);
+    if ($st->size < $MINSIZE) {
+	unlink($pitchpart);
+    } else {
+	save_sample($pitchpart, orgfile => basename($samp), pitch => $repitch);
+    }
+
+
+    save_sample($part, orgfile => basename($samp));
 
 
     $i++;
     $sindex++;
   }
+
+  ## remove the rest
+  @files = glob("$pref*");
+  unlink(@files);
 }
 
 
@@ -300,7 +320,9 @@ sub save_sample {
 		 rate => $rate,
 		 lines => $lines,
 		 nrsamples => $nrsamples,
-		 bpm => $bpm };
+		 bpm => $bpm,
+		 pitch => defined($args{pitch}) ? $args{pitch} : 0
+  };
 
   push(@sample, $result);
 }
@@ -329,7 +351,7 @@ sub xml_save_instruments {
 		       NOTEPOS => $si,
 		       SAMPLEINDEX => $si);
 
-      $soundhash{scalar(keys(%soundhash))} = { instr => $ii, note => $si, name => $instr->{samples}->[$si]->{name}, lines => $instr->{samples}->[$si]->{lines}, bpm => $instr->{samples}->[$si]->{bpm}, file => $instr->{samples}->[$si]->{file}, rate => $instr->{samples}->[$si]->{rate} };
+      $soundhash{scalar(keys(%soundhash))} = { instr => $ii, note => $si, name => $instr->{samples}->[$si]->{name}, lines => $instr->{samples}->[$si]->{lines}, bpm => $instr->{samples}->[$si]->{bpm}, file => $instr->{samples}->[$si]->{file}, rate => $instr->{samples}->[$si]->{rate}, pitch => $instr->{samples}->[$si]->{pitch} };
     }
   }
 }
@@ -337,113 +359,135 @@ sub xml_save_instruments {
 
 
 
-sub xml_generate_patterns {
-  print STDERR "[xml_generate_patterns]\n";
+sub xml_render_patterns {
+  my $song = shift;
+  print STDERR "[xml_render_patterns]\n";
 
-#  my $song = generate_patterns_poly();
-  my $song = generate_patterns_bpm();
+  #### Setup tracks
+  for(my $i = 0; $i < $nrtracks; $i++) {
+    xml_ins_template($SEQUENCERTRACKTMPL, '<SequencerMasterTrack ',
+		     TRACKNAME => "Track $i",
+		     RED => int(rand(256)), GREEN => int(rand(256)), BLUE => int(rand(256)));
 
-  my $maxline = 0;
-  for(my $i = 0; $i < scalar(@{$song->{track}}); $i++) {
-      if(scalar(@{$song->{track}->[$i]})) {
-	  my $endline = $soundhash{$song->{track}->[$i]->[-1]->{soundnr}}->{lines}
-	  + $song->{track}->[$i]->[-1]->{index};
-	  $maxline = $endline > $maxline ? $endline : $maxline;
-      }
+    if($USETRACKFX > 0.0
+       && int($USETRACKFX * 100) > int(rand(100))) {
+      chomp(my @fxs = glob("$FXTMPLPREF"."*"));
+      xml_ins_template($fxs[int(rand(@fxs))], '<\/Devices>', '__skip' => 2);
+    }
   }
-  my $lines = $song->{lines} = $MAXLINES > 0 && $maxline > $MAXLINES ? $MAXLINES : $maxline;
-  
 
-  for my $patnr (0..$NRPATTERNS) {
+
+  for(my $pnr = 0; $pnr < scalar(@{$song->{pattern}}); $pnr++) {
+    print STDERR "[xml_generate_pattern $pnr]\n";
+    my $pat = $song->{pattern}->[$pnr];
+
+    #### Determine actual end line/nr of lines
+    my $maxline = 0;
+    for(my $i = 0; $i < scalar(@{$pat}); $i++) {
+      if(scalar(@{$pat->[$i]})) {
+	my $endline = $soundhash{$pat->[$i]->[-1]->{soundnr}}->{lines}
+	  + $pat->[$i]->[-1]->{index};
+	$maxline = $endline > $maxline ? $endline : $maxline;
+      }
+    }
+    my $lines = $MAXLINES > 0 && $maxline > $MAXLINES ? $MAXLINES : $maxline;
+
     xml_ins_template($PATTERNTMPL, '<\/Patterns>', 
 		     LINES=>$lines );	
-	
-    my $soundnr = 0;
-    for(my $i = 0; $i < scalar(@{$song->{track}}); $i++) {
-      xml_ins_template($SEQUENCERTRACKTMPL, '<SequencerMasterTrack ',
-		       TRACKNAME => "Track $i",
-		       RED => int(rand(256)), GREEN => int(rand(256)), BLUE => int(rand(256)));
+    xml_ins_template($SEQUENCEENTRYTMPL, '<\/SequenceEntries>', 
+		     PATNR=>$pnr );
+
+    for(my $i = 0; $i < scalar(@{$pat}); $i++) {
       xml_ins_template($PATTERNTRACKTMPL, '<PatternMasterTrack');
-
-      next unless(scalar(@{$song->{track}->[$i]}));
-
-
-      my $nrcols = 1;
-      map { $nrcols = ($_->{notecol}+1) > $nrcols ? ($_->{notecol}+1) : $nrcols } @{$song->{track}->[$i]};
-
-
-      if($USETRACKFX > 0.0
-	  && int($USETRACKFX * 100) > int(rand(100))) {
-	  chomp(my @fxs = glob("$FXTMPLPREF"."*"));
-	  xml_ins_template($fxs[int(rand(@fxs))], '<\/Devices>', '__skip' => 2);
-      }
-
-      my $tno = 0;
-      while($tno < @{$song->{track}->[$i]}) {
-	  my $line = $song->{track}->[$i]->[$tno]->{index};
-
-	  my $tono = $tno;
-	  while($tono < @{$song->{track}->[$i]}
-		&& $song->{track}->[$i]->[$tono]->{index} == $line) {
-	      $tono++;
-	  }
-	  $tono--;
-
-	  my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$song->{track}->[$i]}[$tno..$tono];
-
-	  xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>$line);
-
-	  for(my $colnr = 0; $colnr < $nrcols; $colnr++) {
-	      my ($trackline) = grep { $_->{notecol} == $colnr } (@cols);
-	      if($trackline) {
-		  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
-				   INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
-				   NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
-				   PAN => $trackline->{pan},
-				   VOL => $trackline->{vol});
-		  $soundhash{$trackline->{soundnr}}->{used}++;
-	      } else {
-		  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
-				   INSTRNR=> '..',
-				   NOTE => '---',
-				   PAN => '..',
-				   VOL => '..');
-	      }
-	  }
-	  
-	  $tno = $tono + 1;
-      }
+      next unless(scalar(@{$pat->[$i]}));
+      render_track($i, $pat);
     }
-    
-    last;
   }
 }
+
+
+
+sub render_track {
+    my $i = shift;
+    my $pat = shift;
+
+    my $nrcols = 1;
+    map { $nrcols = ($_->{notecol}+1) > $nrcols ? ($_->{notecol}+1) : $nrcols } @{$pat->[$i]};
+
+
+    my $tno = 0;
+    while($tno < @{$pat->[$i]}) {
+	my $line = $pat->[$i]->[$tno]->{index};
+
+	my $tono = $tno;
+	while($tono < @{$pat->[$i]}
+	      && $pat->[$i]->[$tono]->{index} == $line) {
+	    $tono++;
+	}
+	$tono--;
+
+	my @cols = sort { $a->{notecol} <=> $b->{notecol} } @{$pat->[$i]}[$tno..$tono];
+
+	xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>$line);
+
+	for(my $colnr = 0; $colnr < $nrcols; $colnr++) {
+	    my ($trackline) = grep { $_->{notecol} == $colnr } (@cols);
+	    if($trackline) {
+		xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
+				 INSTRNR=> sprintf("%02x", $soundhash{$trackline->{soundnr}}->{instr}),
+				 NOTE => $note2sym[$soundhash{$trackline->{soundnr}}->{note}],
+				 PAN => $trackline->{pan},
+				 VOL => $trackline->{vol});
+		$soundhash{$trackline->{soundnr}}->{used}++;
+	    } else {
+		xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
+				 INSTRNR=> '..',
+				 NOTE => '---',
+				 PAN => '..',
+				 VOL => '..');
+	    }
+	}
+	
+	$tno = $tono + 1;
+    }
+}
+
 
 
 
 sub generate_patterns_bpm {
-    my @track = ();
-    my @track_curindex = ();
+    my @patterns = (
 
-    foreach my $i (0..$nrtracks-1) {
-	push(@track, []);
-	push(@track_curindex, 0);
-    }
+	[
+	 generate_track_bpm(endline => $MAXLINES),
+	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+	 generate_track_bpm(endline => $MAXLINES),
+	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
 
-    $track[0] = generate_track_bpm(endline => $MAXLINES);
+	],
+	
+	[
+	 generate_track_bpm(endline => $MAXLINES),
+	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
+	 generate_track_bpm(endline => $MAXLINES),
+	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
+	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
+	],
 
-#    my $endline = @{$track[0]} ? $soundhash{$track[0]->[-1]->{soundnr}}->{lines} + $track[0]->[-1]->{index}
-#                               : $MAXLINES;
-#    $endline = $MAXLINES > 0 && $endline > $MAXLINES ? $MAXLINES : $endline;
+	);
 
-    $track[1] = generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2);
-    $track[2] = generate_track_monophonic(endline => $MAXLINES);
-#    $track[2] = generate_track_monophonic(endline => $MAXLINES, maxinstrs => 1);
-#    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2);
-#    $track[4] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 3);
-    $track[3] = generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1);
-
-    return { track => \@track };
+    return { pattern => \@patterns };
 }
 
 
@@ -501,8 +545,11 @@ sub generate_track_monophonic {
     my %args = @_;
     $args{endline} || die("call with endline arg");
 
-    my @sounds = grep { $soundhash{$_}->{lines} <= (defined($args{maxlength}) ? $args{maxlength} : $LINESPERBEAT)
-                      } keys %soundhash;
+    my @sounds = 
+	grep { defined($args{minlength}) ? $soundhash{$_}->{lines} >= $args{minlength} : 1 } 
+	grep { defined($args{maxlength}) ? $soundhash{$_}->{lines} <= $args{maxlength} : 1 } 
+	grep { defined($args{maxpitch})  ? $soundhash{$_}->{pitch} <= $args{maxpitch} : 1 } 
+    keys %soundhash;
 
     if(defined($args{maxinstrs})) {
 	my %instrs = ();
@@ -552,36 +599,36 @@ sub generate_track_monophonic {
 
 
 
-sub generate_patterns_poly {
-    my @track = ();
-    my @track_curindex = ();
-
-    foreach my $i (0..$nrtracks-1) {
-	push(@track, []);
-	push(@track_curindex, 0);
-    }
-
-    my $soundnr = 0;
-    my $curtrack = 0;
-    while(defined($soundhash{$soundnr})) {
-	my $index = $track_curindex[$curtrack];
-
-	if(int(rand(100)) > int($SKIPPROB*100)) {
-print STDERR "NOTE track:$curtrack index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
-	    push(@{$track[$curtrack]}, { index => $index,
-					 soundnr => $soundnr,
-					 pan => 40 + int(rand(40)) - int(rand(40)),
-					 vol => 40 + int(rand(40)) - int(rand(40)) });
-	    $track_curindex[$curtrack] += $soundhash{$soundnr}->{lines};
-            $soundnr++;
-	} else {
-	    $track_curindex[$curtrack] += $LINESPERBEAT - int($index % $LINESPERBEAT);
-	}
-	$curtrack = ($curtrack + 1) % $nrtracks;
-    }
-
-    return { track => \@track };
-}
+# sub generate_patterns_poly {
+#     my @track = ();
+#     my @track_curindex = ();
+# 
+#     foreach my $i (0..$nrtracks-1) {
+# 	push(@track, []);
+# 	push(@track_curindex, 0);
+#     }
+# 
+#     my $soundnr = 0;
+#     my $curtrack = 0;
+#     while(defined($soundhash{$soundnr})) {
+# 	my $index = $track_curindex[$curtrack];
+# 
+# 	if(int(rand(100)) > int($SKIPPROB*100)) {
+# print STDERR "NOTE track:$curtrack index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
+# 	    push(@{$track[$curtrack]}, { index => $index,
+# 					 soundnr => $soundnr,
+# 					 pan => 40 + int(rand(40)) - int(rand(40)),
+# 					 vol => 40 + int(rand(40)) - int(rand(40)) });
+# 	    $track_curindex[$curtrack] += $soundhash{$soundnr}->{lines};
+#             $soundnr++;
+# 	} else {
+# 	    $track_curindex[$curtrack] += $LINESPERBEAT - int($index % $LINESPERBEAT);
+# 	}
+# 	$curtrack = ($curtrack + 1) % $nrtracks;
+#     }
+# 
+#     return { track => \@track };
+# }
 
 
 

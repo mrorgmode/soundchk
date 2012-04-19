@@ -334,11 +334,6 @@
   </PatternPool>
   <PatternSequence>
     <SequenceEntries>
-      <SequenceEntry>
-        <IsSectionStart>false</IsSectionStart>
-        <SectionName>Untitled Section</SectionName>
-        <Pattern>0</Pattern>
-      </SequenceEntry>
     </SequenceEntries>
     <LoopSelection>
       <CursorPos>-1</CursorPos>
