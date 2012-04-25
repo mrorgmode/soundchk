@@ -577,7 +577,7 @@ sub generate_track_bpm {
 	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
 	}
     }
-    exit;
+
     return \@track;
 }
 
