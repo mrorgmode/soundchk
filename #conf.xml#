@@ -13,6 +13,8 @@
     maxsampperinstr="200">
 
   <pattern reps="2">
+    <track >
+    </track>
   <pattern>
 
   <pattern reps="1+rand(2)">
