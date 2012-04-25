@@ -397,9 +397,10 @@ sub xml_render_patterns {
     xml_ins_template($SEQUENCEENTRYTMPL, '<\/SequenceEntries>', 
 		     PATNR=>$pnr );
 
-    for(my $i = 0; $i < scalar(@{$pat}); $i++) {
+    for(my $i = 0; $i < $nrtracks; $i++) {
       xml_ins_template($PATTERNTRACKTMPL, '<PatternMasterTrack');
-      if(scalar(@{$pat->[$i]})) {
+      if($pat->[$i]
+	 && scalar(@{$pat->[$i]})) {
 	  render_track($i, $pat);
       } else {
 	  ## nop
