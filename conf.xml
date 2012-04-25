@@ -15,7 +15,6 @@
   <pattern reps="2">
     <track instances="1+rand(3)"
 	   type="generate_track_bpm">
-    </track>
-  <pattern>
-
+  </pattern>      
 </song>
+    
