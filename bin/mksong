@@ -41,7 +41,8 @@ my $MAXSPLIT = $settings->getAttribute("maxsplit") || 20;
 my $RANDOMSPLIT = $settings->getAttribute("randomsplit") || 1;
 my $MINSIZE = $settings->getAttribute("minsize") || 4096;
 my $MAXSAMPPERINSTR = $settings->getAttribute("maxsampperinstr") || 200;
-
+print $MAXSAMPPERINSTR,"\n";
+exit;
 
 my $XMLDIR = "/home/perweij/SparkleShare/soundchk/xml";
 my $SPLIT = "/home/perweij/SparkleShare/soundchk/bin/split_on_silence.sh";
