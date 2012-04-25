@@ -20,7 +20,10 @@ use XML::LibXML;
 
 
 my $parser = new XML::LibXML;
-my $conf = $ARGV[0] || glob("~/SparkleShare/soundchk/conf.xml");
+my $conf = glob("~/SparkleShare/soundchk/conf.xml");
+if($ARGV[0] =~ /.xml$/i) {
+    $conf = shift(@ARGV);
+}
 my $settings = $parser -> parse_file($conf) || die "cannot parse $conf";
 $settings = $settings->getDocumentElement();
 
