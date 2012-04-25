@@ -386,9 +386,9 @@ sub xml_render_patterns {
   }
 
 
-  for(my $pnr = 0; $pnr < scalar(@{$song->{pattern}}); $pnr++) {
+  for(my $pnr = 0; $pnr < scalar(@{$song}); $pnr++) {
     print STDERR "[xml_generate_pattern $pnr]\n";
-    my $pat = $song->{pattern}->[$pnr];
+    my $pat = $song->[$pnr];
 
     #### Determine actual end line/nr of lines
     my $maxline = 0;
