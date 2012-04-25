@@ -490,6 +490,8 @@ sub generate_patterns_bpm {
 	    push(@patterns, \@tracks);
 	}
     }
+
+    return \@patterns;
 }
 
 
