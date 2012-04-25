@@ -79,7 +79,7 @@ GetOptions('name=s'  => \$opts{'name'},
 	   'split=s'  => \$opts{'split'},
 	  );
 
-mkdir("$opts{name}") || die("1");
+mkdir("$opts{name}") || die("cannot make dir $opts{name}");
 mkdir("$opts{name}/SampleData") || die("2");
 system("touch "."$opts{name}/Song.xml");
 
