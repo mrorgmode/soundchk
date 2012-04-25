@@ -24,6 +24,7 @@ my $conf = $ARGV[0] || glob("~/SparkleShare/soundchk/conf.xml");
 my $settings = $parser -> parse_file($conf) || die "cannot parse $conf";
 $settings = $settings->getDocumentElement();
 
+
 ## Sequencer parameters
 my $NRPATTERNS = 2;
 my $nrtracks = $settings->getAttribute("nrtracks") || 10;
