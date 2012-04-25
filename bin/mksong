@@ -480,9 +480,9 @@ sub generate_patterns_bpm {
 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
 	 generate_track_bpm(endline => $MAXLINES),
 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
-	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
-	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
-	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
+#	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+#	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
+#	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
 	],
 
 	);
