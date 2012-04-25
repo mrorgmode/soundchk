@@ -399,8 +399,11 @@ sub xml_render_patterns {
 
     for(my $i = 0; $i < scalar(@{$pat}); $i++) {
       xml_ins_template($PATTERNTRACKTMPL, '<PatternMasterTrack');
-      next unless(scalar(@{$pat->[$i]}));
-      render_track($i, $pat);
+      if(scalar(@{$pat->[$i]})) {
+	  render_track($i, $pat);
+      } else {
+	  xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>0);
+      }
     }
   }
 }
