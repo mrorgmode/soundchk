@@ -472,7 +472,11 @@ sub render_track {
 
 sub generate_patterns_bpm {
     my @patterns = ( );
-    my @p = $settings->findnodes("pattern");
+    my @pats = $settings->findnodes("pattern");
+
+    foreach my $p (@pats) {
+	print $p->getAttribute("reps"),"\n";
+    }
 }
 
 
