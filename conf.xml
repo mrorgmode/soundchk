@@ -10,7 +10,7 @@
     maxsplit="20"
     randomsplit="1"
     minsize="4096"
-    maxsampperinstr="200">
+    maxsampperinstr="300">
 
 
 </song>
