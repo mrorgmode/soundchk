@@ -477,6 +477,7 @@ sub generate_patterns_bpm {
     foreach my $p (@pats) {
 	print $p->getAttribute("reps"),"\n";
     }
+    exit;
 }
 
 
