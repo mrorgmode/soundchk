@@ -476,10 +476,11 @@ sub generate_patterns_bpm {
 
     foreach my $p (@pats) {
 	my $genpat = undef;
-	if($p->getAttribute("type") eq "generate_track_bpm") {
-	    $genpat = generate_track_bpm(endline => $MAXLINES);
+	foreach my $track (@{$p->findnodes("track")}) {
+	    if($track->getAttribute("type") eq "generate_track_bpm") {
+		$genpat = generate_track_bpm(endline => $MAXLINES);
+	    }
 	}
-
 	for my $rep (1..$p->getAttribute("reps")) {
 	    push(@patterns, $genpat);
 	}
