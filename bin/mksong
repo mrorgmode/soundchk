@@ -294,7 +294,7 @@ sub save_sample {
   my $bpm = 0;
 
   if($samp =~ /__type=music/) {
-      system("sox -i '$file' -o '$file.wav'") == 0 || warn("failed ");
+      system("sox -i '$file' -o '$file.wav' 2>/dev/null") == 0 || warn("failed ");
       system("$TRIM '$file.wav' '$file.trim.wav' && mv '$file.trim.wav' '$file.wav'");
       chomp($bpm = `soundstretch '$file.wav' -bpm 2>&1 | grep "Detected BPM"`);
       $bpm =~ s/^.* rate //;
@@ -315,9 +315,9 @@ sub save_sample {
       }
   }
 
-  chomp(my $nrsamples = `sox --info '$file' | grep samples`);
+  chomp(my $nrsamples = `sox --info '$file'  2>/dev/null| grep samples`);
   $nrsamples =~ s/^.* = (\d+) samples.*$/$1/g;
-  my $rate = `sox --info '$file' | grep "^Sample Rate"`;
+  my $rate = `sox --info '$file'  2>/dev/null| grep "^Sample Rate"`;
   $rate =~ s/Sample Rate    : (\d+)$/$1/;
   my $lines = ceil(((0.0 + $nrsamples) / $rate) * ($BPM / 60 * $LINESPERBEAT));
 print STDERR "LINES: $lines $safename\n";
