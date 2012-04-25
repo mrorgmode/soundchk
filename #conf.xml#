@@ -1,2 +1,16 @@
-<song>
+<song
+    nrtracks="10"
+    notespace="1"
+    bpm="125"
+    stretchmaxbeats="20"
+    linesperbeat="8"
+    usetrackfx="0.7"
+    skipprob="0.2"
+
+    maxsplit="20"
+    randomsplit="1"
+    minsize="4096"
+    maxsampperinstr="200">
+
+
 </song>

@@ -24,7 +24,7 @@ my $settings = $parser -> parse_file($ARGV[0]) || die "cannot parse $ARGV[0]";
 
 
 ## Sequencer parameters
-my $NRPATTERNS = 2;
+my $NRPATTERNS = $settings->getAttribute() || 2;
 my $nrtracks = 10;
 my $notespace = 1;
 my $BPM = 125;
