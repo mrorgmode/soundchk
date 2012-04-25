@@ -403,6 +403,11 @@ sub xml_render_patterns {
 	  render_track($i, $pat);
       } else {
 	  xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>0);
+	  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
+			   INSTRNR=> '..',
+			   NOTE => '---',
+			   PAN => '..',
+			   VOL => '..');
       }
     }
   }
