@@ -402,6 +402,7 @@ sub xml_render_patterns {
       if(scalar(@{$pat->[$i]})) {
 	  render_track($i, $pat);
       } else {
+	  ## nop
 	  xml_ins_template($LINETMPL, '<\/Lines>', INDEX=>0);
 	  xml_ins_template($NOTETMPL, '<\/NoteColumns>', 
 			   INSTRNR=> '..',
