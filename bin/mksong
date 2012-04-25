@@ -16,6 +16,7 @@ use File::Copy;
 use File::Spec;
 use File::stat;
 use POSIX qw/ceil/;
+use XML::LíbXML;
 
 
 ## Sequencer parameters
