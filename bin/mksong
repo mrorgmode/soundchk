@@ -19,23 +19,27 @@ use POSIX qw/ceil/;
 use XML::LibXML;
 
 
+my $parser = new XML::LibXML;
+my $settings = $parser -> parse_file($ARGV[0]) || die "cannot parse $ARGV[0]";
+
+
 ## Sequencer parameters
 my $NRPATTERNS = 2;
-my $nrtracks = 10;
-my $notespace = 1;
-my $BPM = 125;
-my $STRETCHMAXBEATS = 20;
-my $LINESPERBEAT = 8;
+my $nrtracks = $settings->getAttribute("nrtracks") || 10;
+my $notespace = $settings->getAttribute("notespace") || 1;
+my $BPM = $settings->getAttribute("bpm") || 125;
+my $STRETCHMAXBEATS = $settings->getAttribute("stretchmaxbeats") || 20;
+my $LINESPERBEAT = $settings->getAttribute("linesperbeat") || 8;
 my $MAXLINES = $LINESPERBEAT * 16;
-my $USETRACKFX = 0.7;
-my $SKIPPROB = 0.2;
+my $USETRACKFX = $settings->getAttribute("usetrackfx") || 0.7;
+my $SKIPPROB = $settings->getAttribute("skipprob") || 0.2;
 
 
 ## Instrument parameters
-my $MAXSPLIT = 20;
-my $RANDOMSPLIT = 1;
-my $MINSIZE = 4096;
-my $MAXSAMPPERINSTR = 200;
+my $MAXSPLIT = $settings->getAttribute("maxsplit") || 20;
+my $RANDOMSPLIT = $settings->getAttribute("randomsplit") || 1;
+my $MINSIZE = $settings->getAttribute("minsize") || 4096;
+my $MAXSAMPPERINSTR = $settings->getAttribute("maxsampperinstr") || 200;
 
 
 my $XMLDIR = "/home/perweij/SparkleShare/soundchk/xml";
