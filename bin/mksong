@@ -309,7 +309,7 @@ sub save_sample {
   my $file        = sprintf("$opts{name}/SampleData/Sample%.2d ($designation)$suff", 0);
 
   move($samp, $file);
-
+  print STDERR "MV $samp to $file\n";
   my $bpm = 0;
 
   if($samp =~ /__type=music/) {
