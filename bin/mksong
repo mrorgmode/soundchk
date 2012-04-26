@@ -160,7 +160,7 @@ sub save_samples {
 sub refresh_bpm {
     my $mean_bpm = calc_mean_bpm();
     if($mean_bpm) {
-	print STDERR "[refresh_bpm] $BPM to $mean_bpm\n";
+	print STDERR "[refresh_bpm] bpm from $BPM to $mean_bpm\n";
 	$BPM = $mean_bpm;
 	$LINESPERBEAT = int($LINESPERBEAT / 2) if($BPM > 100);
 	$MAXLINES = $LINESPERBEAT * 16;
