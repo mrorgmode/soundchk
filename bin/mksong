@@ -164,7 +164,11 @@ sub refresh_bpm {
 	$BPM = $mean_bpm;
 	$LINESPERBEAT = int($LINESPERBEAT / 2) if($BPM > 100);
 	$MAXLINES = $LINESPERBEAT * 16;
-	map { $_->{lines} = ceil(((0.0 + $_->{nrsamples}) / $_->{rate}) * ($BPM / 60 * $LINESPERBEAT)); } @sample;
+	map { 
+	    print STDERR "ref lines ".$_->{lines}." to "; 
+	    $_->{lines} = ceil(((0.0 + $_->{nrsamples}) / $_->{rate}) * ($BPM / 60 * $LINESPERBEAT)); 
+	    print STDERR $_->{lines}."\n";
+	} @sample;
     }
 }
 
