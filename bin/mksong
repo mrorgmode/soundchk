@@ -38,7 +38,7 @@ my $LINESPERBEAT = $settings->getAttribute("linesperbeat") || 8;
 my $MAXLINES = $LINESPERBEAT * 16;
 my $USETRACKFX = $settings->getAttribute("usetrackfx") || 0.7;
 my $SKIPPROB = $settings->getAttribute("skipprob") || 0.2;
-
+my $SPLITSAMP = $settings->getAttribute("chop") || "";
 
 ## Instrument parameters
 my $MAXSPLIT = $settings->getAttribute("maxsplit") || 20;
@@ -75,11 +75,9 @@ my @note2sym = generate_note2sym();
 
 
 my %opts = ( 'name'   => 'songmk',
-	     'split'  => 1,
 	   );
 
 GetOptions('name=s'  => \$opts{'name'},
-	   'split=s'  => \$opts{'split'},
 	  );
 
 mkdir("$opts{name}") || die("cannot make dir $opts{name}");
@@ -158,8 +156,7 @@ sub save_samples {
 	if($opts{chop}) {
 	    system("$SPLIT_EVEN $sound $pref.flac ".$opts{chop});
 	    save_split_sample($sound, $pref);
-	} 
-
+	}
 	if(! $opts{split}) {
 	    save_sample($sound);
 	}
