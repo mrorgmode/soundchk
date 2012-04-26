@@ -7,7 +7,7 @@
     usetrackfx="0.7"
     skipprob="0.2"
     split="1"
-    chop="0.1"
+    chop="1"
 
     maxsplit="20"
     randomsplit="1"
