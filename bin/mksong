@@ -190,6 +190,8 @@ sub delete_unused_samples {
 sub generate_instruments {
   my $samps = shift;
 
+  print STDERR "[generate_instruments]\n";
+
   my $curname = "";
   foreach my $s (@{$samps}) {
     if (! scalar(@instrument)
@@ -199,7 +201,6 @@ sub generate_instruments {
       mkdir("$opts{name}/SampleData/$dir") || die("3");
       push(@instrument, { dir => $dir, samples => [], name => "auto" });
       $curname = $s->{orgfile};
-      print STDERR "SAFENAME $curname\n";
     }
 
     my $file        = sprintf("$opts{name}/SampleData/$instrument[$#instrument]->{dir}/Sample%.2d (Sample%.2d ($s->{name}))$s->{suff}", 
@@ -210,6 +211,8 @@ sub generate_instruments {
 
     push(@{$instrument[$#instrument]->{samples}}, $s);
   }    
+
+  print STDERR "[generate_instruments] instruments: ".scalar(@instrument)."\n";
 }
 
 
