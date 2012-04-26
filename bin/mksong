@@ -86,17 +86,11 @@ system("touch "."$opts{name}/Song.xml");
 
 
 ### Save samples
-save_samples()
+save_samples();
 
 
 ### Calc mean BPM of instruments
-my $mean_bpm = calc_mean_bpm();
-if($mean_bpm) {
-    $BPM = $mean_bpm;
-    $LINESPERBEAT = int($LINESPERBEAT / 2) if($BPM > 100);
-    $MAXLINES = $LINESPERBEAT * 16;
-    map { $_->{lines} = ceil(((0.0 + $_->{nrsamples}) / $_->{rate}) * ($BPM / 60 * $LINESPERBEAT)); } @sample;
-}
+refresh_bpm();
 
 
 ### Create song skeleton
@@ -147,7 +141,6 @@ sub generate_songfile {
 sub save_samples {
     foreach my $sound (@ARGV) {
 	if ($opts{split}) {
-	    print STDERR "[save_split_sample] splitting...\n";
 	    my $pref = "/tmp/splitsamp".int(rand(100000));
 	    system("$SPLIT $sound $pref.flac");
 	    save_split_sample($sound, $pref);
@@ -160,6 +153,18 @@ sub save_samples {
 	if(! $opts{split}) {
 	    save_sample($sound);
 	}
+    }
+}
+
+
+
+sub refresh_bpm {
+    my $mean_bpm = calc_mean_bpm();
+    if($mean_bpm) {
+	$BPM = $mean_bpm;
+	$LINESPERBEAT = int($LINESPERBEAT / 2) if($BPM > 100);
+	$MAXLINES = $LINESPERBEAT * 16;
+	map { $_->{lines} = ceil(((0.0 + $_->{nrsamples}) / $_->{rate}) * ($BPM / 60 * $LINESPERBEAT)); } @sample;
     }
 }
 
