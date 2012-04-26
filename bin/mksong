@@ -140,6 +140,8 @@ sub generate_songfile {
 
 
 sub save_samples {
+    print STDERR "[save_samples]\n";
+
     my $pref = "/tmp/splitsamp".int(rand(100000));
     foreach my $sound (@ARGV) {
 	if(! $SPLITSAMP) {
@@ -154,6 +156,7 @@ sub save_samples {
 	    save_split_sample($sound, $pref);
 	}
     }
+
 }
 
 
@@ -295,8 +298,6 @@ sub save_split_sample {
 sub save_sample {
   my $samp = shift;
   my %args = @_;
-
-  print STDERR "[save_sample] $samp\n";
 
   my $safename = basename($samp);
   $safename =~ s/[^\w\-\._0-9]//g;
