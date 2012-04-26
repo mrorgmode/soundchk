@@ -88,19 +88,7 @@ system("touch "."$opts{name}/Song.xml");
 
 
 ### Save samples
-
-if ($opts{split}) {
-    foreach my $sound (@ARGV) {
-	print STDERR "[save_split_sample] splitting...\n";
-	my $pref = "/tmp/splitsamp".int(rand(100000));
-	system("$SPLIT $sound $pref.flac");
-	save_split_sample($sound, $pref);
-	system("$SPLIT_EVEN $sound $pref.flac 0.3");
-	save_split_sample($sound, $pref);
-    }
-} else {
-  map { save_sample($_) } @ARGV;
-}
+save_samples()
 
 
 ### Calc mean BPM of instruments
@@ -154,6 +142,23 @@ generate_songfile();
 
 sub generate_songfile {
     system("cd $opts{name} && zip -r ../$opts{name}.zip * && mv ../$opts{name}.zip ../$opts{name}.xrns");
+}
+
+
+
+sub save_samples {
+    if ($opts{split}) {
+	foreach my $sound (@ARGV) {
+	    print STDERR "[save_split_sample] splitting...\n";
+	    my $pref = "/tmp/splitsamp".int(rand(100000));
+	    system("$SPLIT $sound $pref.flac");
+	    save_split_sample($sound, $pref);
+	    system("$SPLIT_EVEN $sound $pref.flac 0.3");
+	    save_split_sample($sound, $pref);
+	}
+    } else {
+	map { save_sample($_) } @ARGV;
+    }
 }
 
 
