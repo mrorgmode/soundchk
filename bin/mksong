@@ -320,7 +320,7 @@ sub save_sample {
   my $rate = `sox --info '$file'  2>/dev/null| grep "^Sample Rate"`;
   $rate =~ s/Sample Rate    : (\d+)$/$1/;
   my $lines = ceil(((0.0 + $nrsamples) / $rate) * ($BPM / 60 * $LINESPERBEAT));
-print STDERR "LINES: $lines $safename\n";
+#print STDERR "LINES: $lines $safename\n";
   my $result = { name => $safename, 
 		 orgfile => $args{orgfile},
 		  designation => $designation,
