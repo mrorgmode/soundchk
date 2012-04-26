@@ -150,7 +150,6 @@ sub save_samples {
 	    save_split_sample($sound, $pref);
 	}
 	if($CHOPSAMP) {
-	    print STDERR "DO: $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP."\n";
 	    system("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
 	    save_split_sample($sound, $pref);
 	}
