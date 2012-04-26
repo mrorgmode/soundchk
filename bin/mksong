@@ -139,9 +139,9 @@ sub generate_songfile {
 
 
 sub save_samples {
+    my $pref = "/tmp/splitsamp".int(rand(100000));
     foreach my $sound (@ARGV) {
 	if ($opts{split}) {
-	    my $pref = "/tmp/splitsamp".int(rand(100000));
 	    system("$SPLIT $sound $pref.flac");
 	    save_split_sample($sound, $pref);
 
