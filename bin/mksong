@@ -156,7 +156,7 @@ sub save_samples {
 	    save_split_sample($sound, $pref);
 	}
     }
-
+    print STDERR "[save_samples] saved ".scalar(@sample)." samples.\n";
 }
 
 
