@@ -142,7 +142,8 @@ sub save_samples {
     my $pref = "/tmp/splitsamp".int(rand(100000));
     foreach my $sound (@ARGV) {
 	if(! $opts{split}) {
-	    save_sample($sound);
+	    copy($sound, $pref.".flac");
+	    save_sample($pref.".flac");
 	}
 	if ($opts{split}) {
 	    system("$SPLIT $sound $pref.flac");
