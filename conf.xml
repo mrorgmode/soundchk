@@ -6,6 +6,7 @@
     linesperbeat="8"
     usetrackfx="0.7"
     skipprob="0.2"
+    chop="0.1"
 
     maxsplit="20"
     randomsplit="1"
