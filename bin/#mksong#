@@ -38,7 +38,7 @@ my $LINESPERBEAT = $settings->getAttribute("linesperbeat") || 8;
 my $MAXLINES = $LINESPERBEAT * 16;
 my $USETRACKFX = $settings->getAttribute("usetrackfx") || 0.7;
 my $SKIPPROB = $settings->getAttribute("skipprob") || 0.2;
-my $SPLITSAMP = $settings->getAttribute("skipprob") || "";
+my $SPLITSAMP = $settings->getAttribute("chop") || "";
 
 ## Instrument parameters
 my $MAXSPLIT = $settings->getAttribute("maxsplit") || 20;
