@@ -144,7 +144,6 @@ sub save_samples {
 	if ($opts{split}) {
 	    system("$SPLIT $sound $pref.flac");
 	    save_split_sample($sound, $pref);
-
 	}
 	if($opts{chop}) {
 	    system("$SPLIT_EVEN $sound $pref.flac ".$opts{chop});
