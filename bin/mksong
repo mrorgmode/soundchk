@@ -263,7 +263,7 @@ sub save_split_sample {
     }
     my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
     copy($part, $pitchpart) || warn "copy";
-    system("sox -i '$pitchpart' -o '$pitchpart.wav'") == 0 || warn("failed ");
+    system("sox -i '$pitchpart' -o '$pitchpart.wav' 2>/dev/null") == 0 || warn("failed ");
     system("soundstretch '$pitchpart.wav' '$pitchpart.out.wav' -pitch=$repitch 2>/dev/null") == 0 || warn("failed");
     system("flake '$pitchpart.out.wav' -o '$pitchpart' 2>/dev/null");
     unlink("$pitchpart.wav");
@@ -576,7 +576,7 @@ sub generate_track_bpm {
 	    unless($soundhash{$soundnr}->{bpm} == $BPM) {
 		my $file = $soundhash{$soundnr}->{file};
 		print STDERR "re-bpm $soundhash{$soundnr}->{bpm} to $BPM of $soundhash{$soundnr}->{file}\n";
-		system("sox -i '$file' -o '$file.wav'");
+		system("sox -i '$file' -o '$file.wav' 2>/dev/null");
 		system("soundstretch '$file.wav' '$file.out.wav' -bpm=$BPM 2>/dev/null");
 		unlink("$file");
 		system("flake '$file.out.wav' -o '$file' 2>/dev/null");
