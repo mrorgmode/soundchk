@@ -87,7 +87,7 @@ system("touch "."$opts{name}/Song.xml");
 
 ### Save samples
 save_samples();
-
+exit;
 
 ### Calc mean BPM of instruments
 refresh_bpm();
