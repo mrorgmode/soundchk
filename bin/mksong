@@ -225,7 +225,6 @@ sub generate_instruments {
     move($s->{file}, $file);
     $s->{file} = $file;
 
-    print STDERR "$s\n";
     push(@{$instrument[$#instrument]->{samples}}, $s);
   }    
 
