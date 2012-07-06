@@ -210,7 +210,7 @@ sub generate_instruments {
 
   my $curname = "";
   foreach my $s (@{$samps}) {
-      print STDERR "CHK ".scalar(@{$instrument[$#instrument]->{samples}})." >= $MAXSAMPPERINSTR\n";
+      print STDERR "CHK ".scalar(@{$instrument[$#instrument]->{samples}})." >= $MAXSAMPPERINSTR\n" if(scalar(@instrument));
     if (! scalar(@instrument)
 	|| scalar(@{$instrument[$#instrument]->{samples}}) >= $MAXSAMPPERINSTR
 	|| $curname ne $s->{orgfile}) {
