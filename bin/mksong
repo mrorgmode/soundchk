@@ -210,11 +210,11 @@ sub generate_instruments {
 
   my $curname = "";
   foreach my $s (@{$samps}) {
-      print STDERR "CHK ".scalar(@{$instrument[$#instrument]->{samples}})." >= $MAXSAMPPERINSTR\n" if(scalar(@instrument));
     if (! scalar(@instrument)
 	|| scalar(@{$instrument[$#instrument]->{samples}}) >= $MAXSAMPPERINSTR
 	|| $curname ne $s->{orgfile}) {
       my $dir         = sprintf("Instrument%.2d (auto)", scalar(@instrument));
+      print STDERR $dir,"\n";
       mkdir("$opts{name}/SampleData/$dir") || die("3");
       push(@instrument, { dir => $dir, samples => [], name => "auto" });
       $curname = $s->{orgfile};
