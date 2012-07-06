@@ -33,6 +33,12 @@ my $cdb = CrawlDB->new(filebase => $filebase);
 my $max_link_result_pages = 5;
 
 
+if(@ARGV
+   && $cdb->todolist_size()) {
+    die("search terms provided, but a database already exists - try another directory");
+}
+
+
 if(! $cdb->todolist_size()) {
   my $terms = join(" ", @ARGV);
   system("echo '$terms' > $filebase.terms.txt");
