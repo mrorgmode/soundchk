@@ -12,7 +12,7 @@
     maxsplit="20"
     randomsplit="1"
     minsize="4096"
-    maxsampperinstr="200">
+    maxsampperinstr="38">
 
   <pattern reps="2">
     <track instances="1"
