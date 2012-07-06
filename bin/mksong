@@ -108,7 +108,7 @@ xml_save_instruments(\@instrument);
 
 ### Renoise preloaded instruments
 xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
-exit;
+
 
 ### Generate a song
 my $song = generate_patterns_bpm();
