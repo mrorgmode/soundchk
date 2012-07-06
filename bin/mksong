@@ -88,7 +88,7 @@ system("touch "."$opts{name}/Song.xml");
 
 ### Save samples
 save_samples();
-exit;
+
 
 ### Calc mean BPM of instruments
 refresh_bpm();
@@ -108,7 +108,7 @@ xml_save_instruments(\@instrument);
 
 ### Renoise preloaded instruments
 xml_ins_template($INSTRPRELOADTMPL, '<\/Instruments>');
-
+exit;
 
 ### Generate a song
 my $song = generate_patterns_bpm();
