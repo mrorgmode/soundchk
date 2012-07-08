@@ -144,15 +144,15 @@ sub save_samples {
 
     my $pref = "/tmp/splitsamp".int(rand(100000));
     foreach my $sound (@ARGV) {
-	if(! $SPLITSAMP) {
-	    print STDERR "[save_samples:nosplit]\n";
-	    copy($sound, $pref.".flac");
-	    save_sample($pref.".flac");
-	} else {
-	    print STDERR "[save_samples:split]\n";
-	    mysystem("$SPLIT $sound $pref.flac");
-	    save_split_sample($sound, $pref);
-	}
+#	if(! $SPLITSAMP) {
+#	    print STDERR "[save_samples:nosplit]\n";
+#	    copy($sound, $pref.".flac");
+#	    save_sample($pref.".flac");
+#	} else {
+#	    print STDERR "[save_samples:split]\n";
+#	    mysystem("$SPLIT $sound $pref.flac");
+#	    save_split_sample($sound, $pref);
+#	}
 	if($CHOPSAMP) {
 	    print STDERR "[save_samples:chop]\n";
 	    mysystem("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
