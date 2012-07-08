@@ -151,10 +151,10 @@ sub save_samples {
 	    system("$SPLIT $sound $pref.flac");
 	    save_split_sample($sound, $pref);
 	}
-	if($CHOPSAMP) {
-	    system("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
-	    save_split_sample($sound, $pref);
-	}
+#	if($CHOPSAMP) {
+#	    system("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
+#	    save_split_sample($sound, $pref);
+#	}
     }
     print STDERR "[save_samples] saved ".scalar(@sample)." samples.\n";
 }
