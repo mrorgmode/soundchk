@@ -14,6 +14,19 @@
     minsize="4096"
     maxsampperinstr="200">
 
+  <pattern reps="1">
+    <track instances="1"
+	   type="generate_track_monophonic"
+	   distrib="fixed"
+	   spacing="8"
+	   minpitch="-10"
+	   maxpitch="10"
+	   minlength="2"
+	   />
+  </pattern>      
+
+
+
   <pattern reps="2">
     <track instances="1"
 	   type="generate_track_bpm" />
@@ -50,6 +63,7 @@
 	   maxpitch="10"
 	   minlength="1"
 	   />
+
   </pattern>      
 </song>
     
