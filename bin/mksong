@@ -785,3 +785,9 @@ sub xml_ins_template {
 
   move("$opts{name}/Song.xml.new", "$opts{name}/Song.xml");
 }
+
+
+sub mysystem {
+    print STDERR "[system] ".join(' ', $@),"\n";
+    return system($@);
+}
