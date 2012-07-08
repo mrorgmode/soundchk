@@ -134,7 +134,7 @@ generate_songfile();
 
 
 sub generate_songfile {
-    system("cd $opts{name} && zip -r ../$opts{name}.zip * && mv ../$opts{name}.zip ../$opts{name}.xrns");
+    mysystem("cd $opts{name} && zip -r ../$opts{name}.zip * && mv ../$opts{name}.zip ../$opts{name}.xrns");
 }
 
 
@@ -148,11 +148,11 @@ sub save_samples {
 	    copy($sound, $pref.".flac");
 	    save_sample($pref.".flac");
 	} else {
-	    system("$SPLIT $sound $pref.flac");
+	    mysystem("$SPLIT $sound $pref.flac");
 	    save_split_sample($sound, $pref);
 	}
 	if($CHOPSAMP) {
-	    system("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
+	    mysystem("env LANG=sv_SE.utf8 $SPLIT_EVEN '$sound' $pref.flac ".$CHOPSAMP);
 	    save_split_sample($sound, $pref);
 	}
     }
@@ -266,9 +266,9 @@ sub save_split_sample {
     }
     my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
     copy($part, $pitchpart) || warn "copy";
-    system("sox -i '$pitchpart' -o '$pitchpart.wav' 2>/dev/null") == 0 || warn("failed ");
-    system("soundstretch '$pitchpart.wav' '$pitchpart.out.wav' -pitch=$repitch 2>/dev/null") == 0 || warn("failed");
-    system("flake '$pitchpart.out.wav' -o '$pitchpart' 2>/dev/null");
+    mysystem("sox -i '$pitchpart' -o '$pitchpart.wav' 2>/dev/null") == 0 || warn("failed ");
+    mysystem("soundstretch '$pitchpart.wav' '$pitchpart.out.wav' -pitch=$repitch 2>/dev/null") == 0 || warn("failed");
+    mysystem("flake '$pitchpart.out.wav' -o '$pitchpart' 2>/dev/null");
     unlink("$pitchpart.wav");
     unlink("$pitchpart.out.wav");
     
@@ -311,13 +311,13 @@ sub save_sample {
   my $bpm = 0;
 
   if($samp =~ /__type=music/) {
-      system("sox -i '$file' -o '$file.wav' 2>/dev/null") == 0 || warn("failed ");
-      system("$TRIM '$file.wav' '$file.trim.wav' && mv '$file.trim.wav' '$file.wav'");
+      mysystem("sox -i '$file' -o '$file.wav' 2>/dev/null") == 0 || warn("failed ");
+      mysystem("$TRIM '$file.wav' '$file.trim.wav' && mv '$file.trim.wav' '$file.wav'");
       chomp($bpm = `soundstretch '$file.wav' -bpm 2>&1 | grep "Detected BPM"`);
       $bpm =~ s/^.* rate //;
 
       if($bpm) {
-	  system("flake '$file.wav' -o '$file' 2>/dev/null");
+	  mysystem("flake '$file.wav' -o '$file' 2>/dev/null");
       } else {
 	  $bpm = 0;
       }
@@ -577,10 +577,10 @@ sub generate_track_bpm {
 	    unless($soundhash{$soundnr}->{bpm} == $BPM) {
 		my $file = $soundhash{$soundnr}->{file};
 		print STDERR "re-bpm $soundhash{$soundnr}->{bpm} to $BPM of $soundhash{$soundnr}->{file}\n";
-		system("sox -i '$file' -o '$file.wav' 2>/dev/null");
-		system("soundstretch '$file.wav' '$file.out.wav' -bpm=$BPM 2>/dev/null");
+		mysystem("sox -i '$file' -o '$file.wav' 2>/dev/null");
+		mysystem("soundstretch '$file.wav' '$file.out.wav' -bpm=$BPM 2>/dev/null");
 		unlink("$file");
-		system("flake '$file.out.wav' -o '$file' 2>/dev/null");
+		mysystem("flake '$file.out.wav' -o '$file' 2>/dev/null");
 		unlink("$file.wav");
 		unlink("$file.out.wav");
 		$soundhash{$soundnr}->{bpm} = $BPM;
@@ -785,6 +785,7 @@ sub xml_ins_template {
 
   move("$opts{name}/Song.xml.new", "$opts{name}/Song.xml");
 }
+
 
 
 sub mysystem {
