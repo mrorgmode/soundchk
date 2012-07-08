@@ -19,8 +19,8 @@
 	   type="generate_track_monophonic"
 	   distrib="fixed"
 	   spacing="2"
-	   minpitch="-10"
-	   maxpitch="10"
+	   minpitch="0"
+	   maxpitch="0"
 	   minlength="2"
 	   />
   </pattern>      
