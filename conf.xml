@@ -41,6 +41,15 @@
 	   maxpitch="10"
 	   minlength="2"
 	   />
+
+    <track instances="1"
+	   type="generate_track_monophonic"
+	   distrib="fixed"
+	   spacing="1"
+	   minpitch="-10"
+	   maxpitch="10"
+	   minlength="1"
+	   />
   </pattern>      
 </song>
     
