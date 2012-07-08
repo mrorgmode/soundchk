@@ -258,7 +258,7 @@ sub save_split_sample {
       next;
     }
 
-    my $part = "/tmp/part_".$i."_".basename($samp);
+    my $part = "/tmp/part_".$i."_".basename($pref)."_".basename($samp);
     move($s, $part);
 
 
@@ -267,7 +267,7 @@ sub save_split_sample {
     if($samp =~ /__type=speech/) {
 	$repitch = 3;
     }
-    my $pitchpart = "/tmp/pitchpart_".$i."_".basename($samp);
+    my $pitchpart = "/tmp/pitchpart_".$i."_".basename($pref)."_".basename($samp);
     copy($part, $pitchpart) || warn "copy";
     mysystem("sox -i '$pitchpart' -o '$pitchpart.wav' 2>/dev/null") == 0 || warn("failed ");
     mysystem("soundstretch '$pitchpart.wav' '$pitchpart.out.wav' -pitch=$repitch 2>/dev/null") == 0 || warn("failed");
@@ -356,7 +356,6 @@ sub save_sample {
   };
 
   push(@sample, $result);
-  print STDERR "SAVED $result->{name}\n";
 }
 
 
