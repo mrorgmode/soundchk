@@ -17,6 +17,8 @@
   <pattern reps="2">
     <track instances="1"
 	   type="generate_track_bpm" />
+    <track instances="1"
+	   type="generate_track_monophonic" />
   </pattern>      
 </song>
     
