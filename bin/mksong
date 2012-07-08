@@ -339,7 +339,7 @@ sub save_sample {
   $nrsamples =~ s/^.* = (\d+) samples.*$/$1/g;
   my $rate = `sox --info '$file'  2>/dev/null| grep "^Sample Rate"`;
   $rate =~ s/Sample Rate    : (\d+)$/$1/;
-  return unless($nrsamples && $rate);
+  unless($nrsamples && $rate) { warn "strange values for $safename nrsamples:$nrsamples rate:$rate"; return; }
   my $lines = ceil(((0.0 + $nrsamples) / $rate) * ($BPM / 60 * $LINESPERBEAT));
 
 #print STDERR "LINES: $lines $safename\n";
