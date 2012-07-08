@@ -336,10 +336,10 @@ sub save_sample {
   }
 
   chomp(my $nrsamples = `sox --info '$file'  2>/dev/null| grep samples`);
-  print STDERR "NRSAMP $nrsamples\n";
   $nrsamples =~ s/^.* = (\d+) samples.*$/$1/g;
   my $rate = `sox --info '$file'  2>/dev/null| grep "^Sample Rate"`;
   $rate =~ s/Sample Rate    : (\d+)$/$1/;
+  return unless($nrsamples && $rate);
   my $lines = ceil(((0.0 + $nrsamples) / $rate) * ($BPM / 60 * $LINESPERBEAT));
 
 #print STDERR "LINES: $lines $safename\n";
