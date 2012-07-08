@@ -336,6 +336,7 @@ sub save_sample {
   }
 
   chomp(my $nrsamples = `sox --info '$file'  2>/dev/null| grep samples`);
+  print STDERR "NRSAMP $nrsamples\n";
   $nrsamples =~ s/^.* = (\d+) samples.*$/$1/g;
   my $rate = `sox --info '$file'  2>/dev/null| grep "^Sample Rate"`;
   $rate =~ s/Sample Rate    : (\d+)$/$1/;
