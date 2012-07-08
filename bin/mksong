@@ -253,7 +253,8 @@ sub save_split_sample {
 
     ## don't save too short samples
     my $st = stat($s);
-    if ($st->size < $MINSIZE) {
+    if (! $st
+	|| $st->size < $MINSIZE) {
       unlink($s);
       next;
     }
