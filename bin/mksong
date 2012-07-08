@@ -506,7 +506,13 @@ sub generate_patterns_bpm {
 		if($track->getAttribute("type") eq "generate_track_bpm") {
 		    push(@tracks, generate_track_bpm(endline => $MAXLINES));
 		} elsif($track->getAttribute("type") eq "generate_track_monophonic") {
-		    push(@tracks, generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0));
+		    push(@tracks, generate_track_monophonic(endline => $MAXLINES, 
+							    distrib => $track->getAttribute("distrib") || "fixed", 
+							    spacing => $track->getAttribute("spacing") || 2,
+							    minpitch => $track->getAttribute("minpitch") || 0,
+							    maxpitch => $track->getAttribute("maxpitch") || -1,
+							    minlength => $track->getAttribute("minlength") || 1,
+			 ));
 		}
 	    }
 	}
