@@ -119,7 +119,7 @@ xml_render_patterns($song);
 
 
 ### Delete unused samples
-#delete_unused_samples();
+delete_unused_samples();
 
 
 ### Create song file
