@@ -18,7 +18,14 @@
     <track instances="1"
 	   type="generate_track_bpm" />
     <track instances="1"
-	   type="generate_track_monophonic" />
+	   type="generate_track_monophonic"
+	   distrib="fixed"
+	   spacing="2"
+	   minpitch="0"
+	   maxpitch="-1"
+	   minlength="8"
+	   
+/>
   </pattern>      
 </song>
     
