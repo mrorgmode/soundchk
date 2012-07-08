@@ -17,13 +17,29 @@
   <pattern reps="2">
     <track instances="1"
 	   type="generate_track_bpm" />
-    <track instances="4"
+    <track instances="1"
 	   type="generate_track_monophonic"
 	   distrib="fixed"
-	   spacing="2"
+	   spacing="4"
 	   minpitch="0"
 	   maxpitch="-1"
-	   minlength="8"
+	   minlength="2"
+	   />
+    <track instances="1"
+	   type="generate_track_monophonic"
+	   distrib="fixed"
+	   spacing="6"
+	   minpitch="-10"
+	   maxpitch="10"
+	   minlength="2"
+	   />
+    <track instances="1"
+	   type="generate_track_monophonic"
+	   distrib="fixed"
+	   spacing="8"
+	   minpitch="-10"
+	   maxpitch="10"
+	   minlength="2"
 	   />
   </pattern>      
 </song>
