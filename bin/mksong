@@ -793,6 +793,6 @@ sub xml_ins_template {
 
 
 sub mysystem {
-    print STDERR "[system] ".join(' ', @_),"\n";
+#    print STDERR "[system] ".join(' ', @_),"\n";
     return system(@_);
 }
