@@ -343,8 +343,6 @@ sub save_sample {
   unless($nrsamples && $rate) { warn "strange values for $safename nrsamples:$nrsamples rate:$rate"; return; }
   my $lines = ceil(((0.0 + $nrsamples) / $rate) * ($BPM / 60 * $LINESPERBEAT));
 
-#print STDERR "LINES: $lines $safename\n";
-
   my $result = { name => $safename, 
 		 orgfile => $args{orgfile},
 		  designation => $designation,
@@ -515,8 +513,8 @@ sub generate_patterns_bpm {
 							    maxpitch => $track->getAttribute("maxpitch") || -1,
 							    minlength => $track->getAttribute("minlength") || 1,
 			 ));
-		} elsif($track->getAttribute("type") eq "generate_track_instrument") {
-		    push(@tracks, generate_track_bpm(endline => $MAXLINES));
+		} elsif($track->getAttribute("type") eq "generate_track_instrumentdemo") {
+		    push(@tracks, generate_track_instrumentdemo(endline => $MAXLINES));
 		}
 	    }
 	}
@@ -528,43 +526,6 @@ sub generate_patterns_bpm {
     return \@patterns;
 }
 
-
-
-# sub generate_patterns_bpm {
-#     
-#     my @patterns = (
-# 
-# 	[
-# 	 generate_track_bpm(endline => $MAXLINES),
-# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
-# 	 generate_track_bpm(endline => $MAXLINES),
-# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
-# 
-# 	],
-# 	
-# 	[
-# 	 generate_track_bpm(endline => $MAXLINES),
-# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
-# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
-# 	 generate_track_bpm(endline => $MAXLINES),
-# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
-# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
-# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
-# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
-# 	],
-# 
-# 	);
-# 
-#     return { pattern => \@patterns };
-# }
 
 
 
@@ -675,38 +636,6 @@ sub generate_track_monophonic {
 
 
 
-# sub generate_patterns_poly {
-#     my @track = ();
-#     my @track_curindex = ();
-# 
-#     foreach my $i (0..$nrtracks-1) {
-# 	push(@track, []);
-# 	push(@track_curindex, 0);
-#     }
-# 
-#     my $soundnr = 0;
-#     my $curtrack = 0;
-#     while(defined($soundhash{$soundnr})) {
-# 	my $index = $track_curindex[$curtrack];
-# 
-# 	if(int(rand(100)) > int($SKIPPROB*100)) {
-# print STDERR "NOTE track:$curtrack index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
-# 	    push(@{$track[$curtrack]}, { index => $index,
-# 					 soundnr => $soundnr,
-# 					 pan => 40 + int(rand(40)) - int(rand(40)),
-# 					 vol => 40 + int(rand(40)) - int(rand(40)) });
-# 	    $track_curindex[$curtrack] += $soundhash{$soundnr}->{lines};
-#             $soundnr++;
-# 	} else {
-# 	    $track_curindex[$curtrack] += $LINESPERBEAT - int($index % $LINESPERBEAT);
-# 	}
-# 	$curtrack = ($curtrack + 1) % $nrtracks;
-#     }
-# 
-#     return { track => \@track };
-# }
-
-
 
 sub generate_patterns_even {
 
@@ -807,3 +736,80 @@ sub mysystem {
 #    print STDERR "[system] ".join(' ', @_),"\n";
     return system(@_);
 }
+
+
+
+
+
+
+
+#################
+
+# sub generate_patterns_bpm {
+#     
+#     my @patterns = (
+# 
+# 	[
+# 	 generate_track_bpm(endline => $MAXLINES),
+# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+# 	 generate_track_bpm(endline => $MAXLINES),
+# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 1, minpitch => 0),
+# 
+# 	],
+# 	
+# 	[
+# 	 generate_track_bpm(endline => $MAXLINES),
+# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
+# 	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
+# 	 generate_track_bpm(endline => $MAXLINES),
+# 	  generate_track_monophonic(endline => $MAXLINES, maxlength => $LINESPERBEAT*2),
+# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 64, minlength => $LINESPERBEAT * 4),
+# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", minlength => $LINESPERBEAT, spacing => 8, maxpitch => -1),
+# #	  generate_track_monophonic(endline => $MAXLINES, distrib => "fixed", spacing => 2, minpitch => 0),
+# 	],
+# 
+# 	);
+# 
+#     return { pattern => \@patterns };
+# }
+
+# sub generate_patterns_poly {
+#     my @track = ();
+#     my @track_curindex = ();
+# 
+#     foreach my $i (0..$nrtracks-1) {
+# 	push(@track, []);
+# 	push(@track_curindex, 0);
+#     }
+# 
+#     my $soundnr = 0;
+#     my $curtrack = 0;
+#     while(defined($soundhash{$soundnr})) {
+# 	my $index = $track_curindex[$curtrack];
+# 
+# 	if(int(rand(100)) > int($SKIPPROB*100)) {
+# print STDERR "NOTE track:$curtrack index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
+# 	    push(@{$track[$curtrack]}, { index => $index,
+# 					 soundnr => $soundnr,
+# 					 pan => 40 + int(rand(40)) - int(rand(40)),
+# 					 vol => 40 + int(rand(40)) - int(rand(40)) });
+# 	    $track_curindex[$curtrack] += $soundhash{$soundnr}->{lines};
+#             $soundnr++;
+# 	} else {
+# 	    $track_curindex[$curtrack] += $LINESPERBEAT - int($index % $LINESPERBEAT);
+# 	}
+# 	$curtrack = ($curtrack + 1) % $nrtracks;
+#     }
+# 
+#     return { track => \@track };
+# }
+
+
