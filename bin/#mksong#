@@ -651,31 +651,12 @@ sub generate_track_instrumentdemo {
 	  && $index < $args{endline}) {
 
 	push(@track, { index => $index,
-		       soundnr => $soundnr++,
+		       soundnr => $soundnr,
 		       pan => 40 + int(rand(40)) - int(rand(40)),
 		       vol => 40 + int(rand(40)) - int(rand(40)),
 		       notecol => 0 });
-	
-
-	if((defined($args{distrib}) && $args{distrib} eq "fixed")
-	   || int(rand(100)) > int($SKIPPROB*100)) {
-	    my $soundnr = $sounds[int(rand(@sounds))];
-
-	    print STDERR "NOTE index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
-
-	    push(@track, { index => $index,
-			   soundnr => $soundnr,
-			   pan => 40 + int(rand(40)) - int(rand(40)),
-			   vol => 40 + int(rand(40)) - int(rand(40)),
-		           notecol => 0 });
-	    if(defined($args{spacing})) {
-		$index += $args{spacing};
-	    } else {
-		$index += $soundhash{$soundnr}->{lines};
-	    }
-	} else {
-	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
-	}
+	$soundnr++;
+	$index += $soundhash{$soundnr}->{lines} + 1;
     }
 
     return \@track;
