@@ -642,12 +642,21 @@ sub generate_track_instrumentdemo {
     my @sounds = keys %soundhash;
     my @track = ();
 
-    print STDERR "[generate_track_monophonic] choosing from ".scalar(@sounds)." samples\n";
+    print STDERR "[generate_track_instrumentdemo] choosing from ".scalar(@sounds)." samples\n";
     return \@track unless(@sounds);
 
     my $index = 0;
-    while($index < $args{endline}) {
-		
+    my $soundnr = 0;
+    while($soundnr < scalar(@sounds)
+	  && $index < $args{endline}) {
+
+	push(@track, { index => $index,
+		       soundnr => $soundnr++,
+		       pan => 40 + int(rand(40)) - int(rand(40)),
+		       vol => 40 + int(rand(40)) - int(rand(40)),
+		       notecol => 0 });
+	
+
 	if((defined($args{distrib}) && $args{distrib} eq "fixed")
 	   || int(rand(100)) > int($SKIPPROB*100)) {
 	    my $soundnr = $sounds[int(rand(@sounds))];
