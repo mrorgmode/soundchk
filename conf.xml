@@ -16,13 +16,16 @@
 
   <pattern reps="1">
     <track instances="1"
+	   type="generate_track_instrumentdemo"
+	   />
+<!--    <track instances="1"
 	   type="generate_track_monophonic"
 	   distrib="fixed"
 	   spacing="2"
 	   minpitch="0"
 	   maxpitch="0"
 	   minlength="2"
-	   />
+	   /> -->
   </pattern>      
 </song>
     
