@@ -635,32 +635,43 @@ sub generate_track_monophonic {
 
 
 
+sub generate_track_instrumentdemo {
+    my %args = @_;
+    $args{endline} || die("call with endline arg");
 
+    my @sounds = keys %soundhash;
+    my @track = ();
 
-sub generate_patterns_even {
+    print STDERR "[generate_track_monophonic] choosing from ".scalar(@sounds)." samples\n";
+    return \@track unless(@sounds);
 
-  my $lines = $MAXLINES > 0 ? $MAXLINES : scalar(keys %soundhash)*$notespace;
-  my @track = ();
+    my $index = 0;
+    while($index < $args{endline}) {
+		
+	if((defined($args{distrib}) && $args{distrib} eq "fixed")
+	   || int(rand(100)) > int($SKIPPROB*100)) {
+	    my $soundnr = $sounds[int(rand(@sounds))];
 
-  my $soundnr = 0;
-  foreach my $i (0..$nrtracks-1) {
-      push(@track, []);
+	    print STDERR "NOTE index:$index sound:$soundnr/".scalar(keys %soundhash)." length:".$soundhash{$soundnr}->{lines}." bpm:".$soundhash{$soundnr}->{bpm}." file:".$soundhash{$soundnr}->{file}."\n";
 
-      my $index = $i * $notespace;
-      while ($index < $lines) {
-	  if(int(rand(100)) > int($SKIPPROB*100)) {
-	      push(@{$track[-1]}, { index => $index,
-				    soundnr => $soundnr,
-				    pan => 40 + int(rand(40)) - int(rand(40)),
-				    vol => 40 + int(rand(40)) - int(rand(40)) });
-	      $soundnr = ($soundnr + 1) % scalar(keys %soundhash);
-	  }
-	  $index += $nrtracks * $notespace;
-      }
-  }
+	    push(@track, { index => $index,
+			   soundnr => $soundnr,
+			   pan => 40 + int(rand(40)) - int(rand(40)),
+			   vol => 40 + int(rand(40)) - int(rand(40)),
+		           notecol => 0 });
+	    if(defined($args{spacing})) {
+		$index += $args{spacing};
+	    } else {
+		$index += $soundhash{$soundnr}->{lines};
+	    }
+	} else {
+	    $index += $LINESPERBEAT - int($index % $LINESPERBEAT);
+	}
+    }
 
-  return { track => \@track };
+    return \@track;
 }
+
 
 
 
@@ -813,3 +824,34 @@ sub mysystem {
 # }
 
 
+
+
+
+# sub generate_patterns_even {
+# 
+#   my $lines = $MAXLINES > 0 ? $MAXLINES : scalar(keys %soundhash)*$notespace;
+#   my @track = ();
+# 
+#   my $soundnr = 0;
+#   foreach my $i (0..$nrtracks-1) {
+#       push(@track, []);
+# 
+#       my $index = $i * $notespace;
+#       while ($index < $lines) {
+# 	  if(int(rand(100)) > int($SKIPPROB*100)) {
+# 	      push(@{$track[-1]}, { index => $index,
+# 				    soundnr => $soundnr,
+# 				    pan => 40 + int(rand(40)) - int(rand(40)),
+# 				    vol => 40 + int(rand(40)) - int(rand(40)) });
+# 	      $soundnr = ($soundnr + 1) % scalar(keys %soundhash);
+# 	  }
+# 	  $index += $nrtracks * $notespace;
+#       }
+#   }
+# 
+#   return { track => \@track };
+# }
+# 
+# 
+# 
+# 
