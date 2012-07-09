@@ -5,7 +5,7 @@
     stretchmaxbeats="20"
     linesperbeat="1"
     usetrackfx="0.0"
-    skipprob="0.2"
+    skipprob="0.0"
     split="1"
     chop="1"
 
